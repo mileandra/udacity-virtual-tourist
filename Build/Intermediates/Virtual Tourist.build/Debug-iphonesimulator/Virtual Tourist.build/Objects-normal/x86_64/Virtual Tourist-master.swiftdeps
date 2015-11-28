@@ -1,6 +1,6 @@
 version: "Apple Swift version 2.1 (swiftlang-700.1.101.6 clang-700.1.76)"
 options: "f99cdb29d25e0834475a03278f36c2d9"
-build_time: [502060408, 480385000]
+build_time: [502062569, 681183000]
 inputs:
   "/Users/mileandra/Development/iOS/Udacity/Submissions/Virtual Tourist/Virtual Tourist/AppDelegate.swift": [502060406, 0]
-  "/Users/mileandra/Development/iOS/Udacity/Submissions/Virtual Tourist/Virtual Tourist/ViewController.swift": [502060406, 0]
+  "/Users/mileandra/Development/iOS/Udacity/Submissions/Virtual Tourist/Virtual Tourist/MapViewController.swift": [502062568, 0]

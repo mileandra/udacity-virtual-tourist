@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -21,19 +22,58 @@
             </objects>
             <point key="canvasLocation" x="-693" y="407"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="LPG-4K-215">
             <objects>
-                <viewController id="5ax-5d-tsm" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mapView" id="5ax-5d-tsm" customClass="MapViewController" customModule="Virtual_Tourist" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Z0P-ay-4TX"/>
                         <viewControllerLayoutGuide type="bottom" id="eWy-Tc-Tcy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="LL0-iB-LgU">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7NL-tw-UMe">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <connections>
+                                    <outlet property="delegate" destination="5ax-5d-tsm" id="dAe-P3-eIw"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eWy-Tc-Tcy" firstAttribute="top" secondItem="7NL-tw-UMe" secondAttribute="bottom" id="3fb-8Q-hqb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7NL-tw-UMe" secondAttribute="trailing" constant="-20" id="iuO-jH-k65"/>
+                            <constraint firstItem="7NL-tw-UMe" firstAttribute="leading" secondItem="LL0-iB-LgU" secondAttribute="leadingMargin" constant="-20" id="nNV-SU-OFb"/>
+                            <constraint firstItem="7NL-tw-UMe" firstAttribute="top" secondItem="Z0P-ay-4TX" secondAttribute="bottom" id="ueT-I0-Mhl"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="7NL-tw-UMe"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="iuO-jH-k65"/>
+                                <exclude reference="nNV-SU-OFb"/>
+                                <exclude reference="ueT-I0-Mhl"/>
+                                <exclude reference="3fb-8Q-hqb"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="7NL-tw-UMe"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="iuO-jH-k65"/>
+                                <include reference="nNV-SU-OFb"/>
+                                <include reference="ueT-I0-Mhl"/>
+                                <include reference="3fb-8Q-hqb"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="LL1-4B-rOO"/>
+                    <connections>
+                        <outlet property="mapView" destination="7NL-tw-UMe" id="zf2-3l-r5L"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G81-DA-tC1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
