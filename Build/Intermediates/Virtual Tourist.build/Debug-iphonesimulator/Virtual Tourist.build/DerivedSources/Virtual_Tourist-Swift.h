@@ -88,6 +88,8 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 #if defined(__has_feature) && __has_feature(modules)
 @import UIKit;
 @import MapKit;
+@import CoreData;
+@import CoreLocation;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -108,21 +110,54 @@ SWIFT_CLASS("_TtC15Virtual_Tourist11AppDelegate")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class UIGestureRecognizer;
-@class MKMapView;
-@class MKAnnotationView;
+@class Pin;
 @class NSBundle;
 @class NSCoder;
+
+SWIFT_CLASS("_TtC15Virtual_Tourist28LocationDetailViewController")
+@interface LocationDetailViewController : UIViewController
+@property (nonatomic, strong) Pin * __null_unspecified pin;
+- (void)viewDidLoad;
+- (void)didReceiveMemoryWarning;
+- (nonnull instancetype)initWithNibName:(NSString * __nullable)nibNameOrNil bundle:(NSBundle * __nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * __nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class NSManagedObjectContext;
+@class UIGestureRecognizer;
+@class MKMapView;
+@protocol MKAnnotation;
+@class MKAnnotationView;
+@class UIStoryboardSegue;
 
 SWIFT_CLASS("_TtC15Virtual_Tourist17MapViewController")
 @interface MapViewController : UIViewController <MKMapViewDelegate>
 @property (nonatomic, weak) IBOutlet MKMapView * __null_unspecified mapView;
+@property (nonatomic, strong) Pin * __null_unspecified selectedPin;
 - (void)viewDidLoad;
 - (void)didReceiveMemoryWarning;
+@property (nonatomic, readonly, strong) NSManagedObjectContext * __nonnull sharedContext;
+- (NSArray<Pin *> * __nonnull)fetchAllPins;
 - (void)addPin:(UIGestureRecognizer * __nonnull)gestureRecognizer;
+- (MKAnnotationView * __nullable)mapView:(MKMapView * __nonnull)mapView viewForAnnotation:(id <MKAnnotation> __nonnull)annotation;
 - (void)mapView:(MKMapView * __nonnull)mapView didSelectAnnotationView:(MKAnnotationView * __nonnull)view;
+- (void)mapView:(MKMapView * __nonnull)mapView regionDidChangeAnimated:(BOOL)animated;
+- (void)saveMapRegion;
+- (void)loadMapRegion;
+- (void)prepareForSegue:(UIStoryboardSegue * __nonnull)segue sender:(id __nullable)sender;
 - (nonnull instancetype)initWithNibName:(NSString * __nullable)nibNameOrNil bundle:(NSBundle * __nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * __nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class NSEntityDescription;
+
+SWIFT_CLASS("_TtC15Virtual_Tourist3Pin")
+@interface Pin : NSManagedObject <MKAnnotation>
+@property (nonatomic) double latitude;
+@property (nonatomic) double longitude;
+- (nonnull instancetype)initWithEntity:(NSEntityDescription * __nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * __nullable)context OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate context:(NSManagedObjectContext * __nonnull)context OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic) CLLocationCoordinate2D coordinate;
 @end
 
 #pragma clang diagnostic pop

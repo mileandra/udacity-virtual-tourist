@@ -14,6 +14,9 @@
 		71A3A9141C0A539F008E4D0C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71A3A9131C0A539F008E4D0C /* MapKit.framework */; };
 		71A3A9161C0A53F8008E4D0C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A3A9151C0A53F8008E4D0C /* MapViewController.swift */; };
 		71A3A9191C0A54CF008E4D0C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 71A3A9171C0A54CF008E4D0C /* Model.xcdatamodeld */; };
+		71A3A91B1C0A5AD2008E4D0C /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A3A91A1C0A5AD2008E4D0C /* LocationDetailViewController.swift */; };
+		71A3A9231C0BB004008E4D0C /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A3A9221C0BB004008E4D0C /* Pin.swift */; };
+		71A3A9251C0CE30B008E4D0C /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A3A9241C0CE30B008E4D0C /* CoreDataStackManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		71A3A9131C0A539F008E4D0C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		71A3A9151C0A53F8008E4D0C /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		71A3A9181C0A54CF008E4D0C /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		71A3A91A1C0A5AD2008E4D0C /* LocationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDetailViewController.swift; sourceTree = "<group>"; };
+		71A3A9221C0BB004008E4D0C /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
+		71A3A9241C0CE30B008E4D0C /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,15 +66,34 @@
 		71A3A9001C0A5076008E4D0C /* Virtual Tourist */ = {
 			isa = PBXGroup;
 			children = (
+				71A3A91D1C0BAF92008E4D0C /* Controllers */,
+				71A3A91C1C0BAF89008E4D0C /* Models */,
 				71A3A9011C0A5076008E4D0C /* AppDelegate.swift */,
 				71A3A9051C0A5076008E4D0C /* Main.storyboard */,
 				71A3A9081C0A5076008E4D0C /* Assets.xcassets */,
 				71A3A90A1C0A5076008E4D0C /* LaunchScreen.storyboard */,
 				71A3A90D1C0A5076008E4D0C /* Info.plist */,
-				71A3A9151C0A53F8008E4D0C /* MapViewController.swift */,
 				71A3A9171C0A54CF008E4D0C /* Model.xcdatamodeld */,
+				71A3A9241C0CE30B008E4D0C /* CoreDataStackManager.swift */,
 			);
 			path = "Virtual Tourist";
+			sourceTree = "<group>";
+		};
+		71A3A91C1C0BAF89008E4D0C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				71A3A9221C0BB004008E4D0C /* Pin.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		71A3A91D1C0BAF92008E4D0C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				71A3A9151C0A53F8008E4D0C /* MapViewController.swift */,
+				71A3A91A1C0A5AD2008E4D0C /* LocationDetailViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,9 +167,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71A3A9231C0BB004008E4D0C /* Pin.swift in Sources */,
+				71A3A91B1C0A5AD2008E4D0C /* LocationDetailViewController.swift in Sources */,
 				71A3A9021C0A5076008E4D0C /* AppDelegate.swift in Sources */,
 				71A3A9161C0A53F8008E4D0C /* MapViewController.swift in Sources */,
 				71A3A9191C0A54CF008E4D0C /* Model.xcdatamodeld in Sources */,
+				71A3A9251C0CE30B008E4D0C /* CoreDataStackManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +320,7 @@
 				71A3A9121C0A5076008E4D0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
