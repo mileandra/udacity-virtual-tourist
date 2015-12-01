@@ -19,6 +19,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var editButton: UIBarButtonItem!
     
     var selectedPin:Pin!
+    var lastAddedPin:Pin? = nil
     var isEditMode = false
     
     override func viewDidLoad() {
@@ -57,22 +58,38 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
 
-    // MARK: - Adding Pins
+    // MARK: - Adding and removing Pins
     func addPin(gestureRecognizer: UIGestureRecognizer) {
+        
         if isEditMode {
             return
         }
-        if (gestureRecognizer.state == .Began) {
-            let locationInMap = gestureRecognizer.locationInView(mapView)
-            let coord:CLLocationCoordinate2D = mapView.convertPoint(locationInMap, toCoordinateFromView: mapView)
-            
-            let pin = Pin(coordinate: coord, context: sharedContext)
-            mapView.addAnnotation(pin)
-            
-            CoreDataStackManager.sharedInstance().saveContext()
+ 
+        let locationInMap = gestureRecognizer.locationInView(mapView)
+        let coord:CLLocationCoordinate2D = mapView.convertPoint(locationInMap, toCoordinateFromView: mapView)
+        
+        switch gestureRecognizer.state {
+            case UIGestureRecognizerState.Began:
+                lastAddedPin = Pin(coordinate: coord, context: sharedContext)
+                mapView.addAnnotation(lastAddedPin!)
+            case UIGestureRecognizerState.Changed:
+                lastAddedPin!.willChangeValueForKey("coordinate")
+                lastAddedPin!.coordinate = coord
+                lastAddedPin!.didChangeValueForKey("coordinate")
+            case UIGestureRecognizerState.Ended:
+                //TODO: fetch Photos for pin
+                CoreDataStackManager.sharedInstance().saveContext()
+            default:
+                return
         }
         
     }
+    func deletePin(pin: Pin) {
+        mapView.removeAnnotation(pin)
+        sharedContext.deleteObject(pin)
+        CoreDataStackManager.sharedInstance().saveContext()
+    }
+    
     
     @IBAction func toggleEditMode(sender: AnyObject) {
         if isEditMode {
@@ -164,11 +181,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     
-    func deletePin(pin: Pin) {
-        mapView.removeAnnotation(pin)
-        sharedContext.deleteObject(pin)
-        CoreDataStackManager.sharedInstance().saveContext()
-    }
+    
     
     // MARK: - Navigation
 

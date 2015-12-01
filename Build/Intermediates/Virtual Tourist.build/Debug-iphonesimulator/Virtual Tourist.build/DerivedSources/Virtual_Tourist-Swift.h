@@ -111,10 +111,12 @@ SWIFT_CLASS("_TtC15Virtual_Tourist11AppDelegate")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class NSURLSession;
 
 SWIFT_CLASS("_TtC15Virtual_Tourist12FlickrClient")
 @interface FlickrClient : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, strong) NSURLSession * __nonnull session;
++ (FlickrClient * __nonnull)sharedInstance;
 @end
 
 
@@ -151,6 +153,7 @@ SWIFT_CLASS("_TtC15Virtual_Tourist17MapViewController")
 @property (nonatomic, weak) IBOutlet MKMapView * __null_unspecified mapView;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem * __null_unspecified editButton;
 @property (nonatomic, strong) Pin * __null_unspecified selectedPin;
+@property (nonatomic, strong) Pin * __nullable lastAddedPin;
 @property (nonatomic) BOOL isEditMode;
 - (void)viewDidLoad;
 - (void)didReceiveMemoryWarning;

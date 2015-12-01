@@ -22,7 +22,6 @@ class LocationDetailViewController: UIViewController {
         super.viewDidLoad()
         mapView.addAnnotation(pin)
         mapView.setCenterCoordinate(pin.coordinate, animated: true)
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

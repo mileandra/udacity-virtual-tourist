@@ -1,12 +1,12 @@
 version: "Apple Swift version 2.1 (swiftlang-700.1.101.6 clang-700.1.76)"
 options: "f99cdb29d25e0834475a03278f36c2d9"
-build_time: [502294666, 617973000]
+build_time: [502305982, 82692000]
 inputs:
-  "/Users/mileandra/Development/iOS/Udacity/Submissions/Virtual Tourist/Virtual Tourist/FlickrConstants.swift": [502236166, 0]
-  "/Users/mileandra/Development/iOS/Udacity/Submissions/Virtual Tourist/Virtual Tourist/MapViewController.swift": [502294664, 0]
-  "/Users/mileandra/Development/iOS/Udacity/Submissions/Virtual Tourist/Virtual Tourist/LocationDetailViewController.swift": [502293300, 0]
+  "/Users/mileandra/Development/iOS/Udacity/Submissions/Virtual Tourist/Virtual Tourist/MapViewController.swift": [502305969, 0]
+  "/Users/mileandra/Development/iOS/Udacity/Submissions/Virtual Tourist/Virtual Tourist/Photo.swift": [502235589, 0]
+  "/Users/mileandra/Development/iOS/Udacity/Submissions/Virtual Tourist/Virtual Tourist/CoreDataStackManager.swift": [502229089, 0]
   "/Users/mileandra/Development/iOS/Udacity/Submissions/Virtual Tourist/Virtual Tourist/AppDelegate.swift": [502060406, 0]
   "/Users/mileandra/Development/iOS/Udacity/Submissions/Virtual Tourist/Virtual Tourist/Pin.swift": [502235675, 0]
-  "/Users/mileandra/Development/iOS/Udacity/Submissions/Virtual Tourist/Virtual Tourist/FlickrClient.swift": [502283569, 0]
-  "/Users/mileandra/Development/iOS/Udacity/Submissions/Virtual Tourist/Virtual Tourist/CoreDataStackManager.swift": [502229089, 0]
-  "/Users/mileandra/Development/iOS/Udacity/Submissions/Virtual Tourist/Virtual Tourist/Photo.swift": [502235589, 0]
+  "/Users/mileandra/Development/iOS/Udacity/Submissions/Virtual Tourist/Virtual Tourist/FlickrClient.swift": [502305233, 0]
+  "/Users/mileandra/Development/iOS/Udacity/Submissions/Virtual Tourist/Virtual Tourist/FlickrConstants.swift": [502236166, 0]
+  "/Users/mileandra/Development/iOS/Udacity/Submissions/Virtual Tourist/Virtual Tourist/LocationDetailViewController.swift": [502293300, 0]
