@@ -14,7 +14,7 @@ class Pin: NSManagedObject, MKAnnotation {
 
     @NSManaged var latitude: Double
     @NSManaged var longitude: Double
-    
+    @NSManaged var photos:[Photo]
     
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
         super.init(entity: entity, insertIntoManagedObjectContext: context)

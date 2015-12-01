@@ -72,8 +72,15 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="LL1-4B-rOO"/>
+                    <navigationItem key="navigationItem" id="LL1-4B-rOO">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="6sp-Oc-jRT">
+                            <connections>
+                                <action selector="toggleEditMode:" destination="5ax-5d-tsm" id="hcm-vS-Gru"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="6sp-Oc-jRT" id="g1M-Q8-M86"/>
                         <outlet property="mapView" destination="7NL-tw-UMe" id="zf2-3l-r5L"/>
                         <segue destination="tjW-IQ-qpC" kind="showDetail" identifier="locationDetail" action="showViewController:sender:" id="u0x-C4-Z26"/>
                     </connections>
@@ -195,6 +202,11 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="L47-0S-nkb" id="KTd-sJ-WOv"/>
+                        <outlet property="mapView" destination="Epy-l9-2FV" id="g1h-UE-cfs"/>
+                        <outlet property="newCollectionButton" destination="nRt-M9-1rE" id="AuQ-dh-dCK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UCg-yw-9PE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

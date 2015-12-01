@@ -7,14 +7,21 @@
 //
 
 import UIKit
+import MapKit
+import CoreData
 
 class LocationDetailViewController: UIViewController {
 
     var pin:Pin!
     
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var newCollectionButton: UIBarButtonItem!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(pin)
+        mapView.addAnnotation(pin)
+        mapView.setCenterCoordinate(pin.coordinate, animated: true)
         // Do any additional setup after loading the view.
     }
 
@@ -23,6 +30,8 @@ class LocationDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // TODO: handle New Collection Touch
+    // TODO: load images
 
     /*
     // MARK: - Navigation

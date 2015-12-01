@@ -87,6 +87,7 @@ typedef int swift_int3  __attribute__((__ext_vector_type__(3)));
 typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 #if defined(__has_feature) && __has_feature(modules)
 @import UIKit;
+@import ObjectiveC;
 @import MapKit;
 @import CoreData;
 @import CoreLocation;
@@ -110,13 +111,29 @@ SWIFT_CLASS("_TtC15Virtual_Tourist11AppDelegate")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+SWIFT_CLASS("_TtC15Virtual_Tourist12FlickrClient")
+@interface FlickrClient : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface FlickrClient (SWIFT_EXTENSION(Virtual_Tourist))
+@end
+
 @class Pin;
+@class MKMapView;
+@class UIBarButtonItem;
+@class UICollectionView;
 @class NSBundle;
 @class NSCoder;
 
 SWIFT_CLASS("_TtC15Virtual_Tourist28LocationDetailViewController")
 @interface LocationDetailViewController : UIViewController
 @property (nonatomic, strong) Pin * __null_unspecified pin;
+@property (nonatomic, weak) IBOutlet MKMapView * __null_unspecified mapView;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem * __null_unspecified newCollectionButton;
+@property (nonatomic, weak) IBOutlet UICollectionView * __null_unspecified collectionView;
 - (void)viewDidLoad;
 - (void)didReceiveMemoryWarning;
 - (nonnull instancetype)initWithNibName:(NSString * __nullable)nibNameOrNil bundle:(NSBundle * __nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
@@ -125,7 +142,6 @@ SWIFT_CLASS("_TtC15Virtual_Tourist28LocationDetailViewController")
 
 @class NSManagedObjectContext;
 @class UIGestureRecognizer;
-@class MKMapView;
 @protocol MKAnnotation;
 @class MKAnnotationView;
 @class UIStoryboardSegue;
@@ -133,17 +149,21 @@ SWIFT_CLASS("_TtC15Virtual_Tourist28LocationDetailViewController")
 SWIFT_CLASS("_TtC15Virtual_Tourist17MapViewController")
 @interface MapViewController : UIViewController <MKMapViewDelegate>
 @property (nonatomic, weak) IBOutlet MKMapView * __null_unspecified mapView;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem * __null_unspecified editButton;
 @property (nonatomic, strong) Pin * __null_unspecified selectedPin;
+@property (nonatomic) BOOL isEditMode;
 - (void)viewDidLoad;
 - (void)didReceiveMemoryWarning;
 @property (nonatomic, readonly, strong) NSManagedObjectContext * __nonnull sharedContext;
 - (NSArray<Pin *> * __nonnull)fetchAllPins;
 - (void)addPin:(UIGestureRecognizer * __nonnull)gestureRecognizer;
+- (IBAction)toggleEditMode:(id __nonnull)sender;
 - (MKAnnotationView * __nullable)mapView:(MKMapView * __nonnull)mapView viewForAnnotation:(id <MKAnnotation> __nonnull)annotation;
 - (void)mapView:(MKMapView * __nonnull)mapView didSelectAnnotationView:(MKAnnotationView * __nonnull)view;
 - (void)mapView:(MKMapView * __nonnull)mapView regionDidChangeAnimated:(BOOL)animated;
 - (void)saveMapRegion;
 - (void)loadMapRegion;
+- (void)deletePin:(Pin * __nonnull)pin;
 - (void)prepareForSegue:(UIStoryboardSegue * __nonnull)segue sender:(id __nullable)sender;
 - (nonnull instancetype)initWithNibName:(NSString * __nullable)nibNameOrNil bundle:(NSBundle * __nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * __nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
@@ -151,10 +171,21 @@ SWIFT_CLASS("_TtC15Virtual_Tourist17MapViewController")
 
 @class NSEntityDescription;
 
+SWIFT_CLASS("_TtC15Virtual_Tourist5Photo")
+@interface Photo : NSManagedObject
+@property (nonatomic, copy) NSString * __nonnull photoURL;
+@property (nonatomic, copy) NSString * __nullable imagePath;
+@property (nonatomic, strong) Pin * __nonnull pin;
+- (nonnull instancetype)initWithEntity:(NSEntityDescription * __nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * __nullable)context OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithPhotoURL:(NSString * __nonnull)photoURL pin:(Pin * __nonnull)pin context:(NSManagedObjectContext * __nonnull)context OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 SWIFT_CLASS("_TtC15Virtual_Tourist3Pin")
 @interface Pin : NSManagedObject <MKAnnotation>
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
+@property (nonatomic, copy) NSArray<Photo *> * __nonnull photos;
 - (nonnull instancetype)initWithEntity:(NSEntityDescription * __nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * __nullable)context OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate context:(NSManagedObjectContext * __nonnull)context OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic) CLLocationCoordinate2D coordinate;

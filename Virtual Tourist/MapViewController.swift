@@ -5,9 +5,9 @@
 //  Created by Julia Will on 28.11.15.
 //  Copyright © 2015 Julia Will. All rights reserved.
 //
-//  TODO: When a pin is tapped, the app will navigate to the Photo Album view associated with the pin.
-//  TODO: pass pin object to detail view controller
-//
+// TODO: preload images
+// TODO: better error handling
+// TODO: implement edit mode to remove pins
 
 import UIKit
 import MapKit
@@ -16,8 +16,10 @@ import CoreData
 class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var editButton: UIBarButtonItem!
     
     var selectedPin:Pin!
+    var isEditMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,15 +59,30 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     // MARK: - Adding Pins
     func addPin(gestureRecognizer: UIGestureRecognizer) {
-        let locationInMap = gestureRecognizer.locationInView(mapView)
-        let coord:CLLocationCoordinate2D = mapView.convertPoint(locationInMap, toCoordinateFromView: mapView)
+        if isEditMode {
+            return
+        }
+        if (gestureRecognizer.state == .Began) {
+            let locationInMap = gestureRecognizer.locationInView(mapView)
+            let coord:CLLocationCoordinate2D = mapView.convertPoint(locationInMap, toCoordinateFromView: mapView)
+            
+            let pin = Pin(coordinate: coord, context: sharedContext)
+            mapView.addAnnotation(pin)
+            
+            CoreDataStackManager.sharedInstance().saveContext()
+        }
         
-        let pin = Pin(coordinate: coord, context: sharedContext)
-        mapView.addAnnotation(pin)
-        
-        CoreDataStackManager.sharedInstance().saveContext()
     }
     
+    @IBAction func toggleEditMode(sender: AnyObject) {
+        if isEditMode {
+            isEditMode = false
+            editButton.title = "Edit"
+        } else {
+            isEditMode = true
+            editButton.title = "Done"
+        }
+    }
     
     // MARK - MKMapViewDelegate methods
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
@@ -92,7 +109,18 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         print("Pin selected")
         let annotation = view.annotation as! Pin
         selectedPin = annotation
-        performSegueWithIdentifier("locationDetail", sender: self)
+        if !isEditMode {
+            performSegueWithIdentifier("locationDetail", sender: self)
+        } else {
+            let alert = UIAlertController(title: "Delete Pin", message: "Do you want to remove this pin?", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
+
+            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction) in
+                self.selectedPin = nil
+                self.deletePin(annotation)
+            }))
+                        presentViewController(alert, animated: true, completion: nil)
+        }
     }
     
     // We need to detect any changes in region to store them
@@ -135,6 +163,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    
+    func deletePin(pin: Pin) {
+        mapView.removeAnnotation(pin)
+        sharedContext.deleteObject(pin)
+        CoreDataStackManager.sharedInstance().saveContext()
+    }
     
     // MARK: - Navigation
 
