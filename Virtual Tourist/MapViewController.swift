@@ -7,13 +7,13 @@
 //
 // TODO: preload images
 // TODO: better error handling
-// TODO: implement edit mode to remove pins
+// TODO: save Map Region through Core Data
 
 import UIKit
 import MapKit
 import CoreData
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: BaseViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var editButton: UIBarButtonItem!
@@ -51,7 +51,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             let results = try sharedContext.executeFetchRequest(fetchRequest)
             pins = results as! [Pin]
         } catch let error as NSError {
-            //TODO: handle error better
+            showAlert("Ooops", message: "Something went wrong when trying to load existing data")
             print("An error occured accessing managed object context \(error.localizedDescription)")
         }
         return pins
@@ -77,7 +77,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 lastAddedPin!.coordinate = coord
                 lastAddedPin!.didChangeValueForKey("coordinate")
             case UIGestureRecognizerState.Ended:
-                //TODO: fetch Photos for pin
+                getPhotosForPin(lastAddedPin!) { (success, errorString) in
+                    self.lastAddedPin!.isDownloading = false
+                    if success == false {
+                        self.showAlert("An error occurred", message: errorString!)
+                        return
+                    }
+                }
                 CoreDataStackManager.sharedInstance().saveContext()
             default:
                 return

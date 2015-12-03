@@ -16,6 +16,8 @@ class Pin: NSManagedObject, MKAnnotation {
     @NSManaged var longitude: Double
     @NSManaged var photos:[Photo]
     
+    var isDownloading = false
+    
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
     }

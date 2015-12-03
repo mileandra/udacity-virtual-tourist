@@ -87,9 +87,10 @@ typedef int swift_int3  __attribute__((__ext_vector_type__(3)));
 typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 #if defined(__has_feature) && __has_feature(modules)
 @import UIKit;
+@import CoreGraphics;
 @import ObjectiveC;
-@import MapKit;
 @import CoreData;
+@import MapKit;
 @import CoreLocation;
 #endif
 
@@ -111,45 +112,94 @@ SWIFT_CLASS("_TtC15Virtual_Tourist11AppDelegate")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class Pin;
+@class NSBundle;
+@class NSCoder;
+
+SWIFT_CLASS("_TtC15Virtual_Tourist18BaseViewController")
+@interface BaseViewController : UIViewController
+- (void)shakeScreen;
+- (void)getPhotosForPin:(Pin * __nonnull)pin completionHandler:(void (^ __nonnull)(BOOL, NSString * __nullable))completionHandler;
+- (void)showAlert:(NSString * __nonnull)title message:(NSString * __nonnull)message buttonText:(NSString * __nonnull)buttonText shake:(BOOL)shake;
+- (nonnull instancetype)initWithNibName:(NSString * __nullable)nibNameOrNil bundle:(NSBundle * __nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * __nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class UIImageView;
+@class UIActivityIndicatorView;
+
+SWIFT_CLASS("_TtC15Virtual_Tourist10FlickrCell")
+@interface FlickrCell : UICollectionViewCell
+@property (nonatomic, weak) IBOutlet UIImageView * __null_unspecified imageView;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView * __null_unspecified activityIndicator;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * __nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class NSURLSession;
+@class NSError;
+@class NSURLSessionDataTask;
+@class NSData;
 
 SWIFT_CLASS("_TtC15Virtual_Tourist12FlickrClient")
 @interface FlickrClient : NSObject
 @property (nonatomic, strong) NSURLSession * __nonnull session;
+- (NSURLSessionDataTask * __nonnull)taskForGETMethod:(NSDictionary<NSString *, id> * __nonnull)parameters completionHandler:(void (^ __nonnull)(id __null_unspecified, NSError * __nullable))completionHandler;
 + (FlickrClient * __nonnull)sharedInstance;
++ (NSString * __nonnull)escapedParameters:(NSDictionary<NSString *, id> * __nonnull)parameters;
++ (void)parseJSONWithCompletionHandler:(NSData * __nonnull)data completionHandler:(void (^ __nonnull)(id __null_unspecified, NSError * __nullable))completionHandler;
+@end
+
+
+@interface FlickrClient (SWIFT_EXTENSION(Virtual_Tourist))
+- (void)getPhotosForPin:(Pin * __nonnull)pin completionHandler:(void (^ __nonnull)(BOOL, NSString * __nullable))completionHandler;
+- (NSString * __nonnull)createBoundingBoxString:(Pin * __nonnull)pin;
 @end
 
 
 @interface FlickrClient (SWIFT_EXTENSION(Virtual_Tourist))
 @end
 
-@class Pin;
+@class NSIndexPath;
+@class UICollectionView;
+@class NSManagedObjectContext;
+@class NSFetchedResultsController;
 @class MKMapView;
 @class UIBarButtonItem;
-@class UICollectionView;
-@class NSBundle;
-@class NSCoder;
 
 SWIFT_CLASS("_TtC15Virtual_Tourist28LocationDetailViewController")
-@interface LocationDetailViewController : UIViewController
+@interface LocationDetailViewController : BaseViewController <UICollectionViewDataSource, NSFetchedResultsControllerDelegate>
 @property (nonatomic, strong) Pin * __null_unspecified pin;
+@property (nonatomic, copy) NSArray<NSIndexPath *> * __nonnull selectedIndexes;
+@property (nonatomic, copy) NSArray<NSIndexPath *> * __null_unspecified insertedIndexPaths;
+@property (nonatomic, copy) NSArray<NSIndexPath *> * __null_unspecified deletedIndexPaths;
+@property (nonatomic, copy) NSArray<NSIndexPath *> * __null_unspecified updatedIndexPaths;
 @property (nonatomic, weak) IBOutlet MKMapView * __null_unspecified mapView;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem * __null_unspecified newCollectionButton;
 @property (nonatomic, weak) IBOutlet UICollectionView * __null_unspecified collectionView;
 - (void)viewDidLoad;
 - (void)didReceiveMemoryWarning;
+- (void)loadNewCollectionSet;
+- (NSInteger)collectionView:(UICollectionView * __nonnull)collectionView numberOfItemsInSection:(NSInteger)section;
+- (UICollectionViewCell * __nonnull)collectionView:(UICollectionView * __nonnull)collectionView cellForItemAtIndexPath:(NSIndexPath * __nonnull)indexPath;
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView * __nonnull)collectionView;
+- (IBAction)newCollectionButtonTouch:(id __nonnull)sender;
+@property (nonatomic, readonly, strong) NSManagedObjectContext * __nonnull sharedContext;
+@property (nonatomic, strong) NSFetchedResultsController * __nonnull fetchedResultsController;
+- (void)controllerWillChangeContent:(NSFetchedResultsController * __nonnull)controller;
+- (void)controller:(NSFetchedResultsController * __nonnull)controller didChangeObject:(id __nonnull)anObject atIndexPath:(NSIndexPath * __nullable)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath * __nullable)newIndexPath;
+- (void)controllerDidChangeContent:(NSFetchedResultsController * __nonnull)controller;
 - (nonnull instancetype)initWithNibName:(NSString * __nullable)nibNameOrNil bundle:(NSBundle * __nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * __nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class NSManagedObjectContext;
 @class UIGestureRecognizer;
 @protocol MKAnnotation;
 @class MKAnnotationView;
 @class UIStoryboardSegue;
 
 SWIFT_CLASS("_TtC15Virtual_Tourist17MapViewController")
-@interface MapViewController : UIViewController <MKMapViewDelegate>
+@interface MapViewController : BaseViewController <MKMapViewDelegate>
 @property (nonatomic, weak) IBOutlet MKMapView * __null_unspecified mapView;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem * __null_unspecified editButton;
 @property (nonatomic, strong) Pin * __null_unspecified selectedPin;
@@ -160,13 +210,13 @@ SWIFT_CLASS("_TtC15Virtual_Tourist17MapViewController")
 @property (nonatomic, readonly, strong) NSManagedObjectContext * __nonnull sharedContext;
 - (NSArray<Pin *> * __nonnull)fetchAllPins;
 - (void)addPin:(UIGestureRecognizer * __nonnull)gestureRecognizer;
+- (void)deletePin:(Pin * __nonnull)pin;
 - (IBAction)toggleEditMode:(id __nonnull)sender;
 - (MKAnnotationView * __nullable)mapView:(MKMapView * __nonnull)mapView viewForAnnotation:(id <MKAnnotation> __nonnull)annotation;
 - (void)mapView:(MKMapView * __nonnull)mapView didSelectAnnotationView:(MKAnnotationView * __nonnull)view;
 - (void)mapView:(MKMapView * __nonnull)mapView regionDidChangeAnimated:(BOOL)animated;
 - (void)saveMapRegion;
 - (void)loadMapRegion;
-- (void)deletePin:(Pin * __nonnull)pin;
 - (void)prepareForSegue:(UIStoryboardSegue * __nonnull)segue sender:(id __nullable)sender;
 - (nonnull instancetype)initWithNibName:(NSString * __nullable)nibNameOrNil bundle:(NSBundle * __nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * __nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
@@ -189,6 +239,7 @@ SWIFT_CLASS("_TtC15Virtual_Tourist3Pin")
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
 @property (nonatomic, copy) NSArray<Photo *> * __nonnull photos;
+@property (nonatomic) BOOL isDownloading;
 - (nonnull instancetype)initWithEntity:(NSEntityDescription * __nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * __nullable)context OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate context:(NSManagedObjectContext * __nonnull)context OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic) CLLocationCoordinate2D coordinate;

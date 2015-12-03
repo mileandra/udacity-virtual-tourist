@@ -8,58 +8,58 @@ provides-member:
 - ["C15Virtual_Tourist17MapViewController", ""]
 - ["VC15Virtual_Tourist17MapViewController7mapKeys", ""]
 provides-dynamic-lookup:
-- "isEditMode"
-- "fetchAllPins"
-- "mapView"
-- "mapView"
-- "mapView"
-- "mapView"
 - "sharedContext"
-- "toggleEditMode"
-- "editButton"
-- "saveMapRegion"
 - "selectedPin"
-- "didReceiveMemoryWarning"
 - "addPin"
-- "prepareForSegue"
-- "viewDidLoad"
-- "loadMapRegion"
-- "deletePin"
+- "toggleEditMode"
 - "lastAddedPin"
+- "viewDidLoad"
+- "deletePin"
+- "mapView"
+- "mapView"
+- "mapView"
+- "mapView"
+- "fetchAllPins"
+- "prepareForSegue"
+- "saveMapRegion"
+- "didReceiveMemoryWarning"
+- "loadMapRegion"
+- "isEditMode"
+- "editButton"
 depends-top-level:
-- !private "UIAlertAction"
-- !private "UILongPressGestureRecognizer"
-- "MKMapView"
-- "UIViewController"
-- !private "CLLocationCoordinate2D"
-- !private "UIAlertController"
-- !private "NSError"
-- !private "!="
-- !private "MKCoordinateSpanMake"
-- "MapViewController"
-- !private "NSUserDefaults"
-- "MKAnnotationView"
-- "BooleanLiteralType"
-- "MKMapViewDelegate"
-- "Bool"
-- "AnyObject"
-- "MKAnnotation"
-- !private "print"
-- "NSManagedObjectContext"
-- !private "=="
-- !private "MKPinAnnotationView"
-- !private "UIGestureRecognizerState"
-- "StringLiteralType"
-- !private "CoreDataStackManager"
-- !private "NSFetchRequest"
-- "UIGestureRecognizer"
-- "UIStoryboardSegue"
-- !private "!"
-- !private "CLLocationCoordinate2DMake"
 - "UIBarButtonItem"
+- !private "NSUserDefaults"
+- "UIGestureRecognizer"
+- "MKMapView"
+- !private "CLLocationCoordinate2D"
+- !private "print"
+- "StringLiteralType"
+- !private "NSFetchRequest"
+- !private "UIGestureRecognizerState"
+- "AnyObject"
+- !private "MKCoordinateSpanMake"
+- "MKMapViewDelegate"
+- !private "=="
+- !private "CLLocationCoordinate2DMake"
+- !private "UILongPressGestureRecognizer"
+- !private "MKCoordinateRegionMake"
+- !private "MKPinAnnotationView"
+- "MKAnnotation"
+- "UIStoryboardSegue"
+- "BooleanLiteralType"
+- !private "UIAlertAction"
+- "NSManagedObjectContext"
+- !private "!="
+- "BaseViewController"
+- "MKAnnotationView"
+- !private "!"
+- !private "NSError"
+- "MapViewController"
+- "Bool"
+- !private "UIAlertController"
+- !private "CoreDataStackManager"
 - !private "LocationDetailViewController"
 - "Pin"
-- !private "MKCoordinateRegionMake"
 depends-member:
 - !private ["PSs9AnyObject", "CLLocationCoordinate2DMake"]
 - !private ["PSs9AnyObject", "CoreDataStackManager"]
@@ -93,8 +93,10 @@ depends-member:
 - ["PSs9AnyObject", "editButton"]
 - !private ["PSs9AnyObject", "executeFetchRequest"]
 - ["PSs9AnyObject", "fetchAllPins"]
+- !private ["PSs9AnyObject", "getPhotosForPin"]
 - !private ["PSs9AnyObject", "identifier"]
 - ["PSs9AnyObject", "init"]
+- !private ["PSs9AnyObject", "isDownloading"]
 - ["PSs9AnyObject", "isEditMode"]
 - ["PSs9AnyObject", "lastAddedPin"]
 - ["PSs9AnyObject", "loadMapRegion"]
@@ -124,6 +126,7 @@ depends-member:
 - !private ["PSs9AnyObject", "setDouble"]
 - ["PSs9AnyObject", "sharedContext"]
 - !private ["PSs9AnyObject", "sharedInstance"]
+- !private ["PSs9AnyObject", "showAlert"]
 - !private ["PSs9AnyObject", "standardUserDefaults"]
 - !private ["PSs9AnyObject", "state"]
 - !private ["PSs9AnyObject", "title"]
@@ -132,6 +135,61 @@ depends-member:
 - !private ["PSs9AnyObject", "willChangeValueForKey"]
 - ["PSs9AnyObject", ""]
 - !private ["Sa", "deinit"]
+- ["C15Virtual_Tourist18BaseViewController", "AnyObject"]
+- ["C15Virtual_Tourist18BaseViewController", "Bool"]
+- !private ["C15Virtual_Tourist18BaseViewController", "CLLocationCoordinate2D"]
+- !private ["C15Virtual_Tourist18BaseViewController", "CLLocationCoordinate2DMake"]
+- !private ["C15Virtual_Tourist18BaseViewController", "CoreDataStackManager"]
+- !private ["C15Virtual_Tourist18BaseViewController", "LocationDetailViewController"]
+- ["C15Virtual_Tourist18BaseViewController", "MKAnnotation"]
+- ["C15Virtual_Tourist18BaseViewController", "MKAnnotationView"]
+- !private ["C15Virtual_Tourist18BaseViewController", "MKCoordinateRegionMake"]
+- !private ["C15Virtual_Tourist18BaseViewController", "MKCoordinateSpanMake"]
+- ["C15Virtual_Tourist18BaseViewController", "MKMapView"]
+- !private ["C15Virtual_Tourist18BaseViewController", "MKPinAnnotationView"]
+- !private ["C15Virtual_Tourist18BaseViewController", "NSError"]
+- !private ["C15Virtual_Tourist18BaseViewController", "NSFetchRequest"]
+- ["C15Virtual_Tourist18BaseViewController", "NSManagedObjectContext"]
+- !private ["C15Virtual_Tourist18BaseViewController", "NSUserDefaults"]
+- ["C15Virtual_Tourist18BaseViewController", "Pin"]
+- !private ["C15Virtual_Tourist18BaseViewController", "UIAlertAction"]
+- !private ["C15Virtual_Tourist18BaseViewController", "UIAlertController"]
+- ["C15Virtual_Tourist18BaseViewController", "UIBarButtonItem"]
+- ["C15Virtual_Tourist18BaseViewController", "UIGestureRecognizer"]
+- !private ["C15Virtual_Tourist18BaseViewController", "UIGestureRecognizerState"]
+- !private ["C15Virtual_Tourist18BaseViewController", "UILongPressGestureRecognizer"]
+- ["C15Virtual_Tourist18BaseViewController", "UIStoryboardSegue"]
+- ["C15Virtual_Tourist18BaseViewController", "addPin"]
+- ["C15Virtual_Tourist18BaseViewController", "deletePin"]
+- ["C15Virtual_Tourist18BaseViewController", "didReceiveMemoryWarning"]
+- ["C15Virtual_Tourist18BaseViewController", "editButton"]
+- ["C15Virtual_Tourist18BaseViewController", "fetchAllPins"]
+- !private ["C15Virtual_Tourist18BaseViewController", "getPhotosForPin"]
+- ["C15Virtual_Tourist18BaseViewController", "init"]
+- ["C15Virtual_Tourist18BaseViewController", "isEditMode"]
+- ["C15Virtual_Tourist18BaseViewController", "lastAddedPin"]
+- ["C15Virtual_Tourist18BaseViewController", "loadMapRegion"]
+- !private ["C15Virtual_Tourist18BaseViewController", "mapKeys"]
+- ["C15Virtual_Tourist18BaseViewController", "mapView"]
+- ["C15Virtual_Tourist18BaseViewController", "mapViewDidFailLoadingMap"]
+- ["C15Virtual_Tourist18BaseViewController", "mapViewDidFinishLoadingMap"]
+- ["C15Virtual_Tourist18BaseViewController", "mapViewDidFinishRenderingMap"]
+- ["C15Virtual_Tourist18BaseViewController", "mapViewDidStopLocatingUser"]
+- ["C15Virtual_Tourist18BaseViewController", "mapViewWillStartLoadingMap"]
+- ["C15Virtual_Tourist18BaseViewController", "mapViewWillStartLocatingUser"]
+- ["C15Virtual_Tourist18BaseViewController", "mapViewWillStartRenderingMap"]
+- !private ["C15Virtual_Tourist18BaseViewController", "performSegueWithIdentifier"]
+- !private ["C15Virtual_Tourist18BaseViewController", "pin"]
+- ["C15Virtual_Tourist18BaseViewController", "prepareForSegue"]
+- !private ["C15Virtual_Tourist18BaseViewController", "presentViewController"]
+- !private ["C15Virtual_Tourist18BaseViewController", "print"]
+- ["C15Virtual_Tourist18BaseViewController", "saveMapRegion"]
+- ["C15Virtual_Tourist18BaseViewController", "selectedPin"]
+- ["C15Virtual_Tourist18BaseViewController", "sharedContext"]
+- !private ["C15Virtual_Tourist18BaseViewController", "showAlert"]
+- ["C15Virtual_Tourist18BaseViewController", "toggleEditMode"]
+- ["C15Virtual_Tourist18BaseViewController", "viewDidLoad"]
+- ["C15Virtual_Tourist18BaseViewController", ""]
 - !private ["Sb", "_getBuiltinLogicValue"]
 - !private ["Sb", "deinit"]
 - !private ["PSs25BooleanLiteralConvertible", "_getBuiltinLogicValue"]
@@ -170,8 +228,10 @@ depends-member:
 - ["PSs11CVarArgType", "editButton"]
 - !private ["PSs11CVarArgType", "executeFetchRequest"]
 - ["PSs11CVarArgType", "fetchAllPins"]
+- !private ["PSs11CVarArgType", "getPhotosForPin"]
 - !private ["PSs11CVarArgType", "identifier"]
 - ["PSs11CVarArgType", "init"]
+- !private ["PSs11CVarArgType", "isDownloading"]
 - ["PSs11CVarArgType", "isEditMode"]
 - ["PSs11CVarArgType", "lastAddedPin"]
 - ["PSs11CVarArgType", "loadMapRegion"]
@@ -198,6 +258,7 @@ depends-member:
 - ["PSs11CVarArgType", "selectedPin"]
 - !private ["PSs11CVarArgType", "setDouble"]
 - ["PSs11CVarArgType", "sharedContext"]
+- !private ["PSs11CVarArgType", "showAlert"]
 - !private ["PSs11CVarArgType", "standardUserDefaults"]
 - !private ["PSs11CVarArgType", "state"]
 - !private ["PSs11CVarArgType", "title"]
@@ -245,8 +306,10 @@ depends-member:
 - ["PSs23CustomStringConvertible", "editButton"]
 - !private ["PSs23CustomStringConvertible", "executeFetchRequest"]
 - ["PSs23CustomStringConvertible", "fetchAllPins"]
+- !private ["PSs23CustomStringConvertible", "getPhotosForPin"]
 - !private ["PSs23CustomStringConvertible", "identifier"]
 - ["PSs23CustomStringConvertible", "init"]
+- !private ["PSs23CustomStringConvertible", "isDownloading"]
 - ["PSs23CustomStringConvertible", "isEditMode"]
 - ["PSs23CustomStringConvertible", "lastAddedPin"]
 - ["PSs23CustomStringConvertible", "loadMapRegion"]
@@ -273,6 +336,7 @@ depends-member:
 - ["PSs23CustomStringConvertible", "selectedPin"]
 - !private ["PSs23CustomStringConvertible", "setDouble"]
 - ["PSs23CustomStringConvertible", "sharedContext"]
+- !private ["PSs23CustomStringConvertible", "showAlert"]
 - !private ["PSs23CustomStringConvertible", "standardUserDefaults"]
 - !private ["PSs23CustomStringConvertible", "state"]
 - !private ["PSs23CustomStringConvertible", "title"]
@@ -319,8 +383,10 @@ depends-member:
 - ["PSs9Equatable", "editButton"]
 - !private ["PSs9Equatable", "executeFetchRequest"]
 - ["PSs9Equatable", "fetchAllPins"]
+- !private ["PSs9Equatable", "getPhotosForPin"]
 - !private ["PSs9Equatable", "identifier"]
 - ["PSs9Equatable", "init"]
+- !private ["PSs9Equatable", "isDownloading"]
 - ["PSs9Equatable", "isEditMode"]
 - ["PSs9Equatable", "lastAddedPin"]
 - ["PSs9Equatable", "loadMapRegion"]
@@ -347,6 +413,7 @@ depends-member:
 - ["PSs9Equatable", "selectedPin"]
 - !private ["PSs9Equatable", "setDouble"]
 - ["PSs9Equatable", "sharedContext"]
+- !private ["PSs9Equatable", "showAlert"]
 - !private ["PSs9Equatable", "standardUserDefaults"]
 - !private ["PSs9Equatable", "state"]
 - !private ["PSs9Equatable", "title"]
@@ -395,8 +462,10 @@ depends-member:
 - ["PSs8Hashable", "editButton"]
 - !private ["PSs8Hashable", "executeFetchRequest"]
 - ["PSs8Hashable", "fetchAllPins"]
+- !private ["PSs8Hashable", "getPhotosForPin"]
 - !private ["PSs8Hashable", "identifier"]
 - ["PSs8Hashable", "init"]
+- !private ["PSs8Hashable", "isDownloading"]
 - ["PSs8Hashable", "isEditMode"]
 - ["PSs8Hashable", "lastAddedPin"]
 - ["PSs8Hashable", "loadMapRegion"]
@@ -423,6 +492,7 @@ depends-member:
 - ["PSs8Hashable", "selectedPin"]
 - !private ["PSs8Hashable", "setDouble"]
 - ["PSs8Hashable", "sharedContext"]
+- !private ["PSs8Hashable", "showAlert"]
 - !private ["PSs8Hashable", "standardUserDefaults"]
 - !private ["PSs8Hashable", "state"]
 - !private ["PSs8Hashable", "title"]
@@ -439,6 +509,7 @@ depends-member:
 - !private ["PSo12MKAnnotation", "coordinate"]
 - !private ["PSo12MKAnnotation", "didChangeValueForKey"]
 - !private ["PSo12MKAnnotation", "init"]
+- !private ["PSo12MKAnnotation", "isDownloading"]
 - !private ["PSo12MKAnnotation", "willChangeValueForKey"]
 - !private ["CSo16MKAnnotationView", "animatesDrop"]
 - !private ["CSo16MKAnnotationView", "annotation"]
@@ -470,6 +541,7 @@ depends-member:
 - !private ["PSo17MKMapViewDelegate", "deletePin"]
 - !private ["PSo17MKMapViewDelegate", "editButton"]
 - !private ["PSo17MKMapViewDelegate", "fetchAllPins"]
+- !private ["PSo17MKMapViewDelegate", "getPhotosForPin"]
 - !private ["PSo17MKMapViewDelegate", "isEditMode"]
 - !private ["PSo17MKMapViewDelegate", "lastAddedPin"]
 - !private ["PSo17MKMapViewDelegate", "loadMapRegion"]
@@ -488,6 +560,7 @@ depends-member:
 - !private ["PSo17MKMapViewDelegate", "saveMapRegion"]
 - !private ["PSo17MKMapViewDelegate", "selectedPin"]
 - !private ["PSo17MKMapViewDelegate", "sharedContext"]
+- !private ["PSo17MKMapViewDelegate", "showAlert"]
 - ["PSo17MKMapViewDelegate", ""]
 - !private ["CSo19MKPinAnnotationView", "animatesDrop"]
 - !private ["CSo19MKPinAnnotationView", "annotation"]
@@ -524,6 +597,7 @@ depends-member:
 - ["C15Virtual_Tourist17MapViewController", "didReceiveMemoryWarning"]
 - ["C15Virtual_Tourist17MapViewController", "editButton"]
 - ["C15Virtual_Tourist17MapViewController", "fetchAllPins"]
+- !private ["C15Virtual_Tourist17MapViewController", "getPhotosForPin"]
 - ["C15Virtual_Tourist17MapViewController", "init"]
 - ["C15Virtual_Tourist17MapViewController", "isEditMode"]
 - ["C15Virtual_Tourist17MapViewController", "lastAddedPin"]
@@ -544,6 +618,7 @@ depends-member:
 - ["C15Virtual_Tourist17MapViewController", "saveMapRegion"]
 - ["C15Virtual_Tourist17MapViewController", "selectedPin"]
 - ["C15Virtual_Tourist17MapViewController", "sharedContext"]
+- !private ["C15Virtual_Tourist17MapViewController", "showAlert"]
 - ["C15Virtual_Tourist17MapViewController", "toggleEditMode"]
 - ["C15Virtual_Tourist17MapViewController", "viewDidLoad"]
 - !private ["PSs14MirrorPathType", "init"]
@@ -575,6 +650,7 @@ depends-member:
 - ["PSo8NSCoding", "editButton"]
 - !private ["PSo8NSCoding", "executeFetchRequest"]
 - ["PSo8NSCoding", "fetchAllPins"]
+- !private ["PSo8NSCoding", "getPhotosForPin"]
 - ["PSo8NSCoding", "init"]
 - ["PSo8NSCoding", "isEditMode"]
 - ["PSo8NSCoding", "lastAddedPin"]
@@ -599,6 +675,7 @@ depends-member:
 - ["PSo8NSCoding", "saveMapRegion"]
 - ["PSo8NSCoding", "selectedPin"]
 - ["PSo8NSCoding", "sharedContext"]
+- !private ["PSo8NSCoding", "showAlert"]
 - !private ["PSo8NSCoding", "title"]
 - ["PSo8NSCoding", "toggleEditMode"]
 - ["PSo8NSCoding", "viewDidLoad"]
@@ -623,6 +700,7 @@ depends-member:
 - ["PSo26NSExtensionRequestHandling", "didReceiveMemoryWarning"]
 - ["PSo26NSExtensionRequestHandling", "editButton"]
 - ["PSo26NSExtensionRequestHandling", "fetchAllPins"]
+- !private ["PSo26NSExtensionRequestHandling", "getPhotosForPin"]
 - ["PSo26NSExtensionRequestHandling", "init"]
 - ["PSo26NSExtensionRequestHandling", "isEditMode"]
 - ["PSo26NSExtensionRequestHandling", "lastAddedPin"]
@@ -644,15 +722,18 @@ depends-member:
 - ["PSo26NSExtensionRequestHandling", "saveMapRegion"]
 - ["PSo26NSExtensionRequestHandling", "selectedPin"]
 - ["PSo26NSExtensionRequestHandling", "sharedContext"]
+- !private ["PSo26NSExtensionRequestHandling", "showAlert"]
 - ["PSo26NSExtensionRequestHandling", "toggleEditMode"]
 - ["PSo26NSExtensionRequestHandling", "viewDidLoad"]
 - ["PSo26NSExtensionRequestHandling", ""]
 - !private ["CSo14NSFetchRequest", "init"]
+- !private ["PSo34NSFetchedResultsControllerDelegate", "pin"]
 - !private ["PSo9NSLocking", "deleteObject"]
 - !private ["PSo9NSLocking", "executeFetchRequest"]
 - !private ["CSo15NSManagedObject", "coordinate"]
 - !private ["CSo15NSManagedObject", "didChangeValueForKey"]
 - !private ["CSo15NSManagedObject", "init"]
+- !private ["CSo15NSManagedObject", "isDownloading"]
 - !private ["CSo15NSManagedObject", "willChangeValueForKey"]
 - !private ["CSo22NSManagedObjectContext", "deleteObject"]
 - !private ["CSo22NSManagedObjectContext", "executeFetchRequest"]
@@ -702,8 +783,10 @@ depends-member:
 - ["CSo8NSObject", "editButton"]
 - !private ["CSo8NSObject", "executeFetchRequest"]
 - ["CSo8NSObject", "fetchAllPins"]
+- !private ["CSo8NSObject", "getPhotosForPin"]
 - !private ["CSo8NSObject", "identifier"]
 - ["CSo8NSObject", "init"]
+- !private ["CSo8NSObject", "isDownloading"]
 - ["CSo8NSObject", "isEditMode"]
 - ["CSo8NSObject", "lastAddedPin"]
 - ["CSo8NSObject", "loadMapRegion"]
@@ -730,6 +813,7 @@ depends-member:
 - ["CSo8NSObject", "selectedPin"]
 - !private ["CSo8NSObject", "setDouble"]
 - ["CSo8NSObject", "sharedContext"]
+- !private ["CSo8NSObject", "showAlert"]
 - !private ["CSo8NSObject", "standardUserDefaults"]
 - !private ["CSo8NSObject", "state"]
 - !private ["CSo8NSObject", "title"]
@@ -768,8 +852,10 @@ depends-member:
 - ["PSo16NSObjectProtocol", "editButton"]
 - !private ["PSo16NSObjectProtocol", "executeFetchRequest"]
 - ["PSo16NSObjectProtocol", "fetchAllPins"]
+- !private ["PSo16NSObjectProtocol", "getPhotosForPin"]
 - !private ["PSo16NSObjectProtocol", "identifier"]
 - ["PSo16NSObjectProtocol", "init"]
+- !private ["PSo16NSObjectProtocol", "isDownloading"]
 - ["PSo16NSObjectProtocol", "isEditMode"]
 - ["PSo16NSObjectProtocol", "lastAddedPin"]
 - ["PSo16NSObjectProtocol", "loadMapRegion"]
@@ -796,6 +882,7 @@ depends-member:
 - ["PSo16NSObjectProtocol", "selectedPin"]
 - !private ["PSo16NSObjectProtocol", "setDouble"]
 - ["PSo16NSObjectProtocol", "sharedContext"]
+- !private ["PSo16NSObjectProtocol", "showAlert"]
 - !private ["PSo16NSObjectProtocol", "standardUserDefaults"]
 - !private ["PSo16NSObjectProtocol", "state"]
 - !private ["PSo16NSObjectProtocol", "title"]
@@ -819,6 +906,7 @@ depends-member:
 - !private ["C15Virtual_Tourist3Pin", "deinit"]
 - !private ["C15Virtual_Tourist3Pin", "didChangeValueForKey"]
 - !private ["C15Virtual_Tourist3Pin", "init"]
+- !private ["C15Virtual_Tourist3Pin", "isDownloading"]
 - !private ["C15Virtual_Tourist3Pin", "willChangeValueForKey"]
 - !private ["PSs16RawRepresentable", "Alert"]
 - ["PSs16RawRepresentable", "Began"]
@@ -887,6 +975,7 @@ depends-member:
 - !private ["PSo21UIAppearanceContainer", "draggable"]
 - ["PSo21UIAppearanceContainer", "editButton"]
 - ["PSo21UIAppearanceContainer", "fetchAllPins"]
+- !private ["PSo21UIAppearanceContainer", "getPhotosForPin"]
 - ["PSo21UIAppearanceContainer", "init"]
 - ["PSo21UIAppearanceContainer", "isEditMode"]
 - ["PSo21UIAppearanceContainer", "lastAddedPin"]
@@ -910,11 +999,13 @@ depends-member:
 - ["PSo21UIAppearanceContainer", "saveMapRegion"]
 - ["PSo21UIAppearanceContainer", "selectedPin"]
 - ["PSo21UIAppearanceContainer", "sharedContext"]
+- !private ["PSo21UIAppearanceContainer", "showAlert"]
 - ["PSo21UIAppearanceContainer", "toggleEditMode"]
 - ["PSo21UIAppearanceContainer", "viewDidLoad"]
 - ["PSo21UIAppearanceContainer", ""]
 - !private ["CSo15UIBarButtonItem", "title"]
 - !private ["CSo9UIBarItem", "title"]
+- !private ["PSo26UICollectionViewDataSource", "pin"]
 - !private ["PSo18UIContentContainer", "CLLocationCoordinate2DMake"]
 - !private ["PSo18UIContentContainer", "CoreDataStackManager"]
 - !private ["PSo18UIContentContainer", "MKCoordinateRegionMake"]
@@ -932,6 +1023,7 @@ depends-member:
 - ["PSo18UIContentContainer", "didReceiveMemoryWarning"]
 - ["PSo18UIContentContainer", "editButton"]
 - ["PSo18UIContentContainer", "fetchAllPins"]
+- !private ["PSo18UIContentContainer", "getPhotosForPin"]
 - ["PSo18UIContentContainer", "init"]
 - ["PSo18UIContentContainer", "isEditMode"]
 - ["PSo18UIContentContainer", "lastAddedPin"]
@@ -953,6 +1045,7 @@ depends-member:
 - ["PSo18UIContentContainer", "saveMapRegion"]
 - ["PSo18UIContentContainer", "selectedPin"]
 - ["PSo18UIContentContainer", "sharedContext"]
+- !private ["PSo18UIContentContainer", "showAlert"]
 - ["PSo18UIContentContainer", "toggleEditMode"]
 - ["PSo18UIContentContainer", "viewDidLoad"]
 - ["PSo18UIContentContainer", ""]
@@ -1006,6 +1099,7 @@ depends-member:
 - !private ["PSo18UIFocusEnvironment", "draggable"]
 - ["PSo18UIFocusEnvironment", "editButton"]
 - ["PSo18UIFocusEnvironment", "fetchAllPins"]
+- !private ["PSo18UIFocusEnvironment", "getPhotosForPin"]
 - ["PSo18UIFocusEnvironment", "init"]
 - ["PSo18UIFocusEnvironment", "isEditMode"]
 - ["PSo18UIFocusEnvironment", "lastAddedPin"]
@@ -1029,6 +1123,7 @@ depends-member:
 - ["PSo18UIFocusEnvironment", "saveMapRegion"]
 - ["PSo18UIFocusEnvironment", "selectedPin"]
 - ["PSo18UIFocusEnvironment", "sharedContext"]
+- !private ["PSo18UIFocusEnvironment", "showAlert"]
 - ["PSo18UIFocusEnvironment", "toggleEditMode"]
 - ["PSo18UIFocusEnvironment", "viewDidLoad"]
 - ["PSo18UIFocusEnvironment", ""]
@@ -1080,6 +1175,7 @@ depends-member:
 - !private ["CSo11UIResponder", "draggable"]
 - ["CSo11UIResponder", "editButton"]
 - ["CSo11UIResponder", "fetchAllPins"]
+- !private ["CSo11UIResponder", "getPhotosForPin"]
 - ["CSo11UIResponder", "init"]
 - ["CSo11UIResponder", "isEditMode"]
 - ["CSo11UIResponder", "lastAddedPin"]
@@ -1103,6 +1199,7 @@ depends-member:
 - ["CSo11UIResponder", "saveMapRegion"]
 - ["CSo11UIResponder", "selectedPin"]
 - ["CSo11UIResponder", "sharedContext"]
+- !private ["CSo11UIResponder", "showAlert"]
 - ["CSo11UIResponder", "toggleEditMode"]
 - ["CSo11UIResponder", "viewDidLoad"]
 - !private ["PSo16UIStateRestoring", "CLLocationCoordinate2DMake"]
@@ -1122,6 +1219,7 @@ depends-member:
 - ["PSo16UIStateRestoring", "didReceiveMemoryWarning"]
 - ["PSo16UIStateRestoring", "editButton"]
 - ["PSo16UIStateRestoring", "fetchAllPins"]
+- !private ["PSo16UIStateRestoring", "getPhotosForPin"]
 - ["PSo16UIStateRestoring", "init"]
 - ["PSo16UIStateRestoring", "isEditMode"]
 - ["PSo16UIStateRestoring", "lastAddedPin"]
@@ -1143,6 +1241,7 @@ depends-member:
 - ["PSo16UIStateRestoring", "saveMapRegion"]
 - ["PSo16UIStateRestoring", "selectedPin"]
 - ["PSo16UIStateRestoring", "sharedContext"]
+- !private ["PSo16UIStateRestoring", "showAlert"]
 - ["PSo16UIStateRestoring", "toggleEditMode"]
 - ["PSo16UIStateRestoring", "viewDidLoad"]
 - ["PSo16UIStateRestoring", ""]
@@ -1174,6 +1273,7 @@ depends-member:
 - !private ["PSo18UITraitEnvironment", "draggable"]
 - ["PSo18UITraitEnvironment", "editButton"]
 - ["PSo18UITraitEnvironment", "fetchAllPins"]
+- !private ["PSo18UITraitEnvironment", "getPhotosForPin"]
 - ["PSo18UITraitEnvironment", "init"]
 - ["PSo18UITraitEnvironment", "isEditMode"]
 - ["PSo18UITraitEnvironment", "lastAddedPin"]
@@ -1197,6 +1297,7 @@ depends-member:
 - ["PSo18UITraitEnvironment", "saveMapRegion"]
 - ["PSo18UITraitEnvironment", "selectedPin"]
 - ["PSo18UITraitEnvironment", "sharedContext"]
+- !private ["PSo18UITraitEnvironment", "showAlert"]
 - ["PSo18UITraitEnvironment", "toggleEditMode"]
 - ["PSo18UITraitEnvironment", "viewDidLoad"]
 - ["PSo18UITraitEnvironment", ""]
@@ -1243,6 +1344,7 @@ depends-member:
 - ["CSo16UIViewController", "didReceiveMemoryWarning"]
 - ["CSo16UIViewController", "editButton"]
 - ["CSo16UIViewController", "fetchAllPins"]
+- !private ["CSo16UIViewController", "getPhotosForPin"]
 - ["CSo16UIViewController", "init"]
 - ["CSo16UIViewController", "isEditMode"]
 - ["CSo16UIViewController", "lastAddedPin"]
@@ -1264,9 +1366,9 @@ depends-member:
 - ["CSo16UIViewController", "saveMapRegion"]
 - ["CSo16UIViewController", "selectedPin"]
 - ["CSo16UIViewController", "sharedContext"]
+- !private ["CSo16UIViewController", "showAlert"]
 - ["CSo16UIViewController", "toggleEditMode"]
 - ["CSo16UIViewController", "viewDidLoad"]
-- ["CSo16UIViewController", ""]
 - !private ["Su", "deinit"]
 - !private ["VSs6UInt16", "deinit"]
 - !private ["VSs6UInt32", "deinit"]
@@ -1305,6 +1407,7 @@ depends-member:
 depends-nominal:
 - "PSs9AnyObject"
 - !private "Sa"
+- "C15Virtual_Tourist18BaseViewController"
 - !private "Sb"
 - !private "PSs25BooleanLiteralConvertible"
 - !private "PSs11BooleanType"
@@ -1341,6 +1444,7 @@ depends-nominal:
 - !private "CSo7NSError"
 - "PSo26NSExtensionRequestHandling"
 - !private "CSo14NSFetchRequest"
+- !private "PSo34NSFetchedResultsControllerDelegate"
 - !private "PSo9NSLocking"
 - !private "CSo15NSManagedObject"
 - !private "CSo22NSManagedObjectContext"
@@ -1370,6 +1474,7 @@ depends-nominal:
 - "PSo21UIAppearanceContainer"
 - !private "CSo15UIBarButtonItem"
 - !private "CSo9UIBarItem"
+- !private "PSo26UICollectionViewDataSource"
 - "PSo18UIContentContainer"
 - !private "PSo17UICoordinateSpace"
 - !private "PSo13UIDynamicItem"
@@ -1412,4 +1517,4 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/UIKit.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreImage.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreLocation.swiftmodule"
-interface-hash: "584332054e95b34fe1359333daa754e3"
+interface-hash: "9932b8338cd97e282fc822bc4c4cd2fa"

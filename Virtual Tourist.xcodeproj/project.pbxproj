@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7113CF321C0E46F60096E7BD /* FlickrConvenient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7113CF311C0E46F60096E7BD /* FlickrConvenient.swift */; };
+		7113CF341C0F994C0096E7BD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7113CF331C0F994C0096E7BD /* BaseViewController.swift */; };
+		7113CF361C10B51C0096E7BD /* FlickrCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7113CF351C10B51C0096E7BD /* FlickrCell.swift */; };
 		71A3A9021C0A5076008E4D0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A3A9011C0A5076008E4D0C /* AppDelegate.swift */; };
 		71A3A9071C0A5076008E4D0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71A3A9051C0A5076008E4D0C /* Main.storyboard */; };
 		71A3A9091C0A5076008E4D0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71A3A9081C0A5076008E4D0C /* Assets.xcassets */; };
@@ -23,6 +26,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7113CF311C0E46F60096E7BD /* FlickrConvenient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrConvenient.swift; sourceTree = "<group>"; };
+		7113CF331C0F994C0096E7BD /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		7113CF351C10B51C0096E7BD /* FlickrCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrCell.swift; sourceTree = "<group>"; };
 		71A3A8FE1C0A5076008E4D0C /* Virtual Tourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Virtual Tourist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71A3A9011C0A5076008E4D0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71A3A9061C0A5076008E4D0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -52,6 +58,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7113CF371C10B5240096E7BD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7113CF351C10B51C0096E7BD /* FlickrCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		71A3A8F51C0A5076008E4D0C = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +86,7 @@
 		71A3A9001C0A5076008E4D0C /* Virtual Tourist */ = {
 			isa = PBXGroup;
 			children = (
+				7113CF371C10B5240096E7BD /* Views */,
 				71A3A91D1C0BAF92008E4D0C /* Controllers */,
 				71A3A91C1C0BAF89008E4D0C /* Models */,
 				71A3A9011C0A5076008E4D0C /* AppDelegate.swift */,
@@ -100,6 +115,7 @@
 			children = (
 				71A3A9151C0A53F8008E4D0C /* MapViewController.swift */,
 				71A3A91A1C0A5AD2008E4D0C /* LocationDetailViewController.swift */,
+				7113CF331C0F994C0096E7BD /* BaseViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -109,6 +125,7 @@
 			children = (
 				71A3A9291C0CFE1F008E4D0C /* FlickrClient.swift */,
 				71A3A92B1C0CFE39008E4D0C /* FlickrConstants.swift */,
+				7113CF311C0E46F60096E7BD /* FlickrConvenient.swift */,
 			);
 			name = Flickr;
 			sourceTree = "<group>";
@@ -186,9 +203,12 @@
 			files = (
 				71A3A9271C0CFBC4008E4D0C /* Photo.swift in Sources */,
 				71A3A92C1C0CFE39008E4D0C /* FlickrConstants.swift in Sources */,
+				7113CF341C0F994C0096E7BD /* BaseViewController.swift in Sources */,
 				71A3A9231C0BB004008E4D0C /* Pin.swift in Sources */,
 				71A3A91B1C0A5AD2008E4D0C /* LocationDetailViewController.swift in Sources */,
 				71A3A9021C0A5076008E4D0C /* AppDelegate.swift in Sources */,
+				7113CF361C10B51C0096E7BD /* FlickrCell.swift in Sources */,
+				7113CF321C0E46F60096E7BD /* FlickrConvenient.swift in Sources */,
 				71A3A9161C0A53F8008E4D0C /* MapViewController.swift in Sources */,
 				71A3A9191C0A54CF008E4D0C /* Model.xcdatamodeld in Sources */,
 				71A3A9251C0CE30B008E4D0C /* CoreDataStackManager.swift in Sources */,
