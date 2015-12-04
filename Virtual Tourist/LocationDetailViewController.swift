@@ -46,6 +46,13 @@ class LocationDetailViewController: BaseViewController, UICollectionViewDataSour
             // fail gracfully - download new collection
             loadNewCollectionSet()
         }
+        
+        //disable new collection button if we are already downloading
+        if pin.isDownloading {
+            newCollectionButton.enabled = false
+        }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "pinFinishedDownload", name: pinFinishedDownloadingNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,23 +64,32 @@ class LocationDetailViewController: BaseViewController, UICollectionViewDataSour
         for photo in fetchedResultsController.fetchedObjects as! [Photo] {
             sharedContext.deleteObject(photo)
         }
+        CoreDataStackManager.sharedInstance().saveContext()
         
         self.newCollectionButton.enabled = false
+        print(pin.photos.count)
+        
         getPhotosForPin(pin) { (success, errorString) in
-            self.pin.isDownloading = false
-            self.newCollectionButton.enabled = true
-            
-            if let objects = self.fetchedResultsController.fetchedObjects {
-                if objects.count == 0 {
-                    self.collectionView.hidden = true
-                    self.noImagesLabel.hidden = false
-                    self.newCollectionButton.enabled = false
-                }
-            }
+            self.pinFinishedDownload()
             
             if success == false {
                 self.showAlert("An error occurred", message: errorString!)
                 return
+            }
+        }
+    }
+    
+    func pinFinishedDownload() {
+        if pin.isDownloading == true {
+            return
+        }
+        self.newCollectionButton.enabled = true
+        
+        if let objects = self.fetchedResultsController.fetchedObjects {
+            if objects.count == 0 {
+                self.collectionView.hidden = true
+                self.noImagesLabel.hidden = false
+                self.newCollectionButton.enabled = false
             }
         }
     }

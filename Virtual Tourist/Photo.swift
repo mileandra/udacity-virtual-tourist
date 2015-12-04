@@ -48,6 +48,9 @@ class Photo: NSManagedObject {
     
     // Make sure the current image is deleted from teh file system when a Photo is deleted
     override func prepareForDeletion() {
+        if (imagePath == nil) {
+            return
+        }
         let fileURL = getFileURL()
         if NSFileManager.defaultManager().fileExistsAtPath(fileURL.path!) {
             do {

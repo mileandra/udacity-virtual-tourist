@@ -11,6 +11,7 @@ import CoreData
 
 class BaseViewController: UIViewController {
     
+    let pinFinishedDownloadingNotification = "pinFinishedDownloadNotification"
     
     /* via http://stackoverflow.com/a/9371196/1415844 */
     func shakeScreen() {
@@ -34,7 +35,9 @@ class BaseViewController: UIViewController {
         pin.isDownloading = true
         FlickrClient.sharedInstance().getPhotosForPin(pin) { (success, errorString) in
             pin.isDownloading = false
+            
             CoreDataStackManager.sharedInstance().saveContext()
+            NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: self.pinFinishedDownloadingNotification, object: self))
             completionHandler(success: success, errorString: errorString)
         }
     }

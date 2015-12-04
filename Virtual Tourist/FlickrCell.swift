@@ -13,5 +13,14 @@ class FlickrCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    
+    override func prepareForReuse() {
+        
+        super.prepareForReuse()
+        
+        if imageView.image == nil {
+            activityIndicator.hidden = false
+            activityIndicator.startAnimating()
+        }
+    }
+
 }

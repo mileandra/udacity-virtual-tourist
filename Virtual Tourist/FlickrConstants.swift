@@ -29,6 +29,7 @@ extension FlickrClient {
         static let BBOX             = "bbox"
         static let PAGE             = "page"
         static let PER_PAGE         = "per_page"
+        static let SORT             = "sort"
     }
     
     struct ParameterValues {

@@ -119,6 +119,7 @@ SWIFT_CLASS("_TtC15Virtual_Tourist11AppDelegate")
 
 SWIFT_CLASS("_TtC15Virtual_Tourist18BaseViewController")
 @interface BaseViewController : UIViewController
+@property (nonatomic, readonly, copy) NSString * __nonnull pinFinishedDownloadingNotification;
 - (void)shakeScreen;
 - (void)getPhotosForPin:(Pin * __nonnull)pin completionHandler:(void (^ __nonnull)(BOOL, NSString * __nullable))completionHandler;
 - (void)showAlert:(NSString * __nonnull)title message:(NSString * __nonnull)message buttonText:(NSString * __nonnull)buttonText shake:(BOOL)shake;
@@ -134,6 +135,7 @@ SWIFT_CLASS("_TtC15Virtual_Tourist10FlickrCell")
 @interface FlickrCell : UICollectionViewCell
 @property (nonatomic, weak) IBOutlet UIImageView * __null_unspecified imageView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView * __null_unspecified activityIndicator;
+- (void)prepareForReuse;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * __nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -170,6 +172,7 @@ SWIFT_CLASS("_TtC15Virtual_Tourist12FlickrClient")
 @class NSFetchedResultsController;
 @class MKMapView;
 @class UIBarButtonItem;
+@class UILabel;
 
 SWIFT_CLASS("_TtC15Virtual_Tourist28LocationDetailViewController")
 @interface LocationDetailViewController : BaseViewController <UIScrollViewDelegate, UICollectionViewDelegate, NSFetchedResultsControllerDelegate, UICollectionViewDataSource>
@@ -181,9 +184,12 @@ SWIFT_CLASS("_TtC15Virtual_Tourist28LocationDetailViewController")
 @property (nonatomic, weak) IBOutlet MKMapView * __null_unspecified mapView;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem * __null_unspecified newCollectionButton;
 @property (nonatomic, weak) IBOutlet UICollectionView * __null_unspecified collectionView;
+@property (nonatomic, weak) IBOutlet UILabel * __null_unspecified noImagesLabel;
+- (void)viewWillAppear:(BOOL)animated;
 - (void)viewDidLoad;
 - (void)didReceiveMemoryWarning;
 - (void)loadNewCollectionSet;
+- (void)pinFinishedDownload;
 - (NSInteger)collectionView:(UICollectionView * __nonnull)collectionView numberOfItemsInSection:(NSInteger)section;
 - (UICollectionViewCell * __nonnull)collectionView:(UICollectionView * __nonnull)collectionView cellForItemAtIndexPath:(NSIndexPath * __nonnull)indexPath;
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView * __nonnull)collectionView;

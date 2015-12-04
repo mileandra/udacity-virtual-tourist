@@ -18,10 +18,17 @@ extension FlickrClient {
         var pageNumber = 1
         
         if let numPages = pin.numPages {
-            let numPagesInt = numPages as Int
+            var numPagesInt = numPages as Int
+            // We might only access the first 4000 images returned by a search, so limit the results
+            if numPagesInt > 190 {
+                numPagesInt = 190
+            }
             pageNumber = Int((arc4random_uniform(UInt32(numPagesInt)))) + 1
             print("Getting photos for page number \(pageNumber) in \(numPages) total pages")
         }
+        // Shuffle Sort to get more random images
+        let possibleSorts = ["date-posted-desc", "date-posted-asc", "date-taken-desc", "date-taken-asc", "interstingness-desc", "interestingness-asc"]
+        let sortBy = possibleSorts[Int((arc4random_uniform(UInt32(possibleSorts.count))))]
         
         let parameters = [
             ParameterKeys.METHOD: Methods.SEARCH,
@@ -31,7 +38,8 @@ extension FlickrClient {
             ParameterKeys.SAFE_SEARCH: "1",
             ParameterKeys.BBOX: createBoundingBoxString(pin),
             ParameterKeys.PAGE: pageNumber,
-            ParameterKeys.PER_PAGE: 21
+            ParameterKeys.PER_PAGE: 21,
+            ParameterKeys.SORT: sortBy
         ]
         
         taskForGETMethod(nil, parameters: parameters as! [String : AnyObject], parseJSON: true) { (JSONResult, error) in
