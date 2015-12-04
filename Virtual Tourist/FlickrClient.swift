@@ -21,12 +21,16 @@ class FlickrClient: NSObject {
     }
     
     // MARK: GET Methods
-    func taskForGETMethod(parameters: [String : AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
-        var mutableParameters = parameters
-        mutableParameters[ParameterKeys.API_KEY] = Constants.APIKey
- 
-        let urlString = Constants.BASE_URL + FlickrClient.escapedParameters(mutableParameters)
-        let url = NSURL(string: urlString)!
+    func taskForGETMethod(url: String?, parameters: [String : AnyObject]?, parseJSON: Bool, completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+        
+        var urlString = (url != nil) ? url : Constants.BASE_URL
+        if parameters != nil {
+            var mutableParameters = parameters
+            mutableParameters![ParameterKeys.API_KEY] = Constants.APIKey
+            urlString = urlString! + FlickrClient.escapedParameters(mutableParameters!)
+        }
+        
+        let url = NSURL(string: urlString!)!
         let request = NSURLRequest(URL: url)
         
         /* 4. Make the request */
@@ -64,7 +68,12 @@ class FlickrClient: NSObject {
             }
             
             /* 5/6. Parse the data and use the data (happens in completion handler) */
-            FlickrClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+            if parseJSON {
+                FlickrClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+            } else {
+                completionHandler(result: data, error: nil)
+            }
+            
         }
         
         /* 7. Start the request */

@@ -27,6 +27,8 @@ extension FlickrClient {
         static let FORMAT           = "format"
         static let NO_JSON_CALLBACK = "nojsoncallback"
         static let BBOX             = "bbox"
+        static let PAGE             = "page"
+        static let PER_PAGE         = "per_page"
     }
     
     struct ParameterValues {

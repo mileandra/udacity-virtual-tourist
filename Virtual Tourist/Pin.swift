@@ -14,6 +14,7 @@ class Pin: NSManagedObject, MKAnnotation {
 
     @NSManaged var latitude: Double
     @NSManaged var longitude: Double
+    @NSManaged var numPages: NSNumber?
     @NSManaged var photos:[Photo]
     
     var isDownloading = false

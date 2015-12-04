@@ -39,10 +39,7 @@ class MapViewController: BaseViewController, MKMapViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Core Data implementation
-    var sharedContext: NSManagedObjectContext {
-        return CoreDataStackManager.sharedInstance().managedObjectContext
-    }
+    // MARK: - Core Data implementation   
     
     func fetchAllPins() -> [Pin] {
         let fetchRequest = NSFetchRequest(entityName: "Pin")
@@ -142,7 +139,7 @@ class MapViewController: BaseViewController, MKMapViewDelegate {
                 self.selectedPin = nil
                 self.deletePin(annotation)
             }))
-                        presentViewController(alert, animated: true, completion: nil)
+            presentViewController(alert, animated: true, completion: nil)
         }
     }
     

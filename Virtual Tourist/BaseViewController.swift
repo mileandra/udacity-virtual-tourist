@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class BaseViewController: UIViewController {
     
@@ -33,6 +34,8 @@ class BaseViewController: UIViewController {
         pin.isDownloading = true
         FlickrClient.sharedInstance().getPhotosForPin(pin) { (success, errorString) in
             pin.isDownloading = false
+            CoreDataStackManager.sharedInstance().saveContext()
+            completionHandler(success: success, errorString: errorString)
         }
     }
     
@@ -43,5 +46,10 @@ class BaseViewController: UIViewController {
             self.shakeScreen()
         }
         self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    //MARK: Core Data
+    var sharedContext: NSManagedObjectContext {
+        return CoreDataStackManager.sharedInstance().managedObjectContext
     }
 }

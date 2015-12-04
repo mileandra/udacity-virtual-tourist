@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreData
 
-class LocationDetailViewController: BaseViewController, UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
+class LocationDetailViewController: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate {
 
     var pin:Pin!
     
@@ -23,6 +23,12 @@ class LocationDetailViewController: BaseViewController, UICollectionViewDataSour
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var newCollectionButton: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var noImagesLabel: UILabel!
+    
+    override func viewWillAppear(animated: Bool) {
+        noImagesLabel.hidden = true
+        collectionView.hidden = false
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,16 +53,24 @@ class LocationDetailViewController: BaseViewController, UICollectionViewDataSour
         // Dispose of any resources that can be recreated.
     }
     
-    // TODO: handle New Collection Touch
-    // TODO: load images
-    // TODO: remove image on touch
-    
-    func loadNewCollectionSet() {
-        //TODO: handle no images found
+    func loadNewCollectionSet() {        
+        for photo in fetchedResultsController.fetchedObjects as! [Photo] {
+            sharedContext.deleteObject(photo)
+        }
+        
         self.newCollectionButton.enabled = false
         getPhotosForPin(pin) { (success, errorString) in
             self.pin.isDownloading = false
             self.newCollectionButton.enabled = true
+            
+            if let objects = self.fetchedResultsController.fetchedObjects {
+                if objects.count == 0 {
+                    self.collectionView.hidden = true
+                    self.noImagesLabel.hidden = false
+                    self.newCollectionButton.enabled = false
+                }
+            }
+            
             if success == false {
                 self.showAlert("An error occurred", message: errorString!)
                 return
@@ -75,7 +89,14 @@ class LocationDetailViewController: BaseViewController, UICollectionViewDataSour
     
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FlickrCell", forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FlickrCell", forIndexPath: indexPath) as! FlickrCell
+        let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photo
+        
+        if photo.imagePath != nil {
+            cell.activityIndicator.stopAnimating()
+            cell.imageView.image = photo.image
+        }
+        
         return cell
     }
     
@@ -88,18 +109,26 @@ class LocationDetailViewController: BaseViewController, UICollectionViewDataSour
         return 0
     }
     
-    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photo
+        let alert = UIAlertController(title: "Delete Photo", message: "Do you want to remove this photo?", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction) in
+            collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction) in
+            collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+            self.sharedContext.deleteObject(photo)
+            CoreDataStackManager.sharedInstance().saveContext()
+        }))
+        presentViewController(alert, animated: true, completion: nil)
+    }
     
     @IBAction func newCollectionButtonTouch(sender: AnyObject) {
-        // TODO: delete old objects
         loadNewCollectionSet()
     }
     
     //MARK: Core Data
-    var sharedContext: NSManagedObjectContext {
-        return CoreDataStackManager.sharedInstance().managedObjectContext
-    }
-    
     lazy var fetchedResultsController: NSFetchedResultsController = {
         let fetchRequest = NSFetchRequest(entityName: "Photo")
         fetchRequest.predicate = NSPredicate(format: "pin == %@", self.pin)

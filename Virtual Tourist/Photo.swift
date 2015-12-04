@@ -6,6 +6,7 @@
 //  Copyright © 2015 Julia Will. All rights reserved.
 //
 
+import UIKit
 import CoreData
 
 class Photo: NSManagedObject {
@@ -27,5 +28,33 @@ class Photo: NSManagedObject {
         
         self.photoURL = photoURL
         self.pin = pin
+    }
+    
+    var image: UIImage? {
+        if imagePath != nil {
+            let fileURL = getFileURL()
+            return UIImage(contentsOfFile: fileURL.path!)
+        }
+        return nil
+    }
+    
+    func getFileURL() -> NSURL {
+        let fileName = (imagePath! as NSString).lastPathComponent
+        let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let pathArray:[String] = [dirPath, fileName]
+        let fileURL = NSURL.fileURLWithPathComponents(pathArray)
+        return fileURL!
+    }
+    
+    // Make sure the current image is deleted from teh file system when a Photo is deleted
+    override func prepareForDeletion() {
+        let fileURL = getFileURL()
+        if NSFileManager.defaultManager().fileExistsAtPath(fileURL.path!) {
+            do {
+                try NSFileManager.defaultManager().removeItemAtPath(fileURL.path!)
+            } catch let error as NSError {
+                print(error.userInfo) // fail silent
+            }
+        }        
     }
 }

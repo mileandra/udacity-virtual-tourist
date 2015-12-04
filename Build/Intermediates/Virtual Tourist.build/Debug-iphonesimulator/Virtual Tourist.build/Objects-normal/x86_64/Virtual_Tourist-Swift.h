@@ -113,6 +113,7 @@ SWIFT_CLASS("_TtC15Virtual_Tourist11AppDelegate")
 @end
 
 @class Pin;
+@class NSManagedObjectContext;
 @class NSBundle;
 @class NSCoder;
 
@@ -121,6 +122,7 @@ SWIFT_CLASS("_TtC15Virtual_Tourist18BaseViewController")
 - (void)shakeScreen;
 - (void)getPhotosForPin:(Pin * __nonnull)pin completionHandler:(void (^ __nonnull)(BOOL, NSString * __nullable))completionHandler;
 - (void)showAlert:(NSString * __nonnull)title message:(NSString * __nonnull)message buttonText:(NSString * __nonnull)buttonText shake:(BOOL)shake;
+@property (nonatomic, readonly, strong) NSManagedObjectContext * __nonnull sharedContext;
 - (nonnull instancetype)initWithNibName:(NSString * __nullable)nibNameOrNil bundle:(NSBundle * __nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * __nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -144,7 +146,7 @@ SWIFT_CLASS("_TtC15Virtual_Tourist10FlickrCell")
 SWIFT_CLASS("_TtC15Virtual_Tourist12FlickrClient")
 @interface FlickrClient : NSObject
 @property (nonatomic, strong) NSURLSession * __nonnull session;
-- (NSURLSessionDataTask * __nonnull)taskForGETMethod:(NSDictionary<NSString *, id> * __nonnull)parameters completionHandler:(void (^ __nonnull)(id __null_unspecified, NSError * __nullable))completionHandler;
+- (NSURLSessionDataTask * __nonnull)taskForGETMethod:(NSString * __nullable)url parameters:(NSDictionary<NSString *, id> * __nullable)parameters parseJSON:(BOOL)parseJSON completionHandler:(void (^ __nonnull)(id __null_unspecified, NSError * __nullable))completionHandler;
 + (FlickrClient * __nonnull)sharedInstance;
 + (NSString * __nonnull)escapedParameters:(NSDictionary<NSString *, id> * __nonnull)parameters;
 + (void)parseJSONWithCompletionHandler:(NSData * __nonnull)data completionHandler:(void (^ __nonnull)(id __null_unspecified, NSError * __nullable))completionHandler;
@@ -152,23 +154,25 @@ SWIFT_CLASS("_TtC15Virtual_Tourist12FlickrClient")
 
 
 @interface FlickrClient (SWIFT_EXTENSION(Virtual_Tourist))
-- (void)getPhotosForPin:(Pin * __nonnull)pin completionHandler:(void (^ __nonnull)(BOOL, NSString * __nullable))completionHandler;
-- (NSString * __nonnull)createBoundingBoxString:(Pin * __nonnull)pin;
 @end
 
+@class Photo;
 
 @interface FlickrClient (SWIFT_EXTENSION(Virtual_Tourist))
+- (void)getPhotosForPin:(Pin * __nonnull)pin completionHandler:(void (^ __nonnull)(BOOL, NSString * __nullable))completionHandler;
+- (void)downloadImageForPhoto:(Photo * __nonnull)photo completionHandler:(void (^ __nonnull)(BOOL, NSString * __nullable))completionHandler;
+- (NSString * __nonnull)createBoundingBoxString:(Pin * __nonnull)pin;
+@property (nonatomic, readonly, strong) NSManagedObjectContext * __nonnull sharedContext;
 @end
 
 @class NSIndexPath;
 @class UICollectionView;
-@class NSManagedObjectContext;
 @class NSFetchedResultsController;
 @class MKMapView;
 @class UIBarButtonItem;
 
 SWIFT_CLASS("_TtC15Virtual_Tourist28LocationDetailViewController")
-@interface LocationDetailViewController : BaseViewController <UICollectionViewDataSource, NSFetchedResultsControllerDelegate>
+@interface LocationDetailViewController : BaseViewController <UIScrollViewDelegate, UICollectionViewDelegate, NSFetchedResultsControllerDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) Pin * __null_unspecified pin;
 @property (nonatomic, copy) NSArray<NSIndexPath *> * __nonnull selectedIndexes;
 @property (nonatomic, copy) NSArray<NSIndexPath *> * __null_unspecified insertedIndexPaths;
@@ -183,8 +187,8 @@ SWIFT_CLASS("_TtC15Virtual_Tourist28LocationDetailViewController")
 - (NSInteger)collectionView:(UICollectionView * __nonnull)collectionView numberOfItemsInSection:(NSInteger)section;
 - (UICollectionViewCell * __nonnull)collectionView:(UICollectionView * __nonnull)collectionView cellForItemAtIndexPath:(NSIndexPath * __nonnull)indexPath;
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView * __nonnull)collectionView;
+- (void)collectionView:(UICollectionView * __nonnull)collectionView didSelectItemAtIndexPath:(NSIndexPath * __nonnull)indexPath;
 - (IBAction)newCollectionButtonTouch:(id __nonnull)sender;
-@property (nonatomic, readonly, strong) NSManagedObjectContext * __nonnull sharedContext;
 @property (nonatomic, strong) NSFetchedResultsController * __nonnull fetchedResultsController;
 - (void)controllerWillChangeContent:(NSFetchedResultsController * __nonnull)controller;
 - (void)controller:(NSFetchedResultsController * __nonnull)controller didChangeObject:(id __nonnull)anObject atIndexPath:(NSIndexPath * __nullable)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath * __nullable)newIndexPath;
@@ -207,7 +211,6 @@ SWIFT_CLASS("_TtC15Virtual_Tourist17MapViewController")
 @property (nonatomic) BOOL isEditMode;
 - (void)viewDidLoad;
 - (void)didReceiveMemoryWarning;
-@property (nonatomic, readonly, strong) NSManagedObjectContext * __nonnull sharedContext;
 - (NSArray<Pin *> * __nonnull)fetchAllPins;
 - (void)addPin:(UIGestureRecognizer * __nonnull)gestureRecognizer;
 - (void)deletePin:(Pin * __nonnull)pin;
@@ -223,6 +226,8 @@ SWIFT_CLASS("_TtC15Virtual_Tourist17MapViewController")
 @end
 
 @class NSEntityDescription;
+@class UIImage;
+@class NSURL;
 
 SWIFT_CLASS("_TtC15Virtual_Tourist5Photo")
 @interface Photo : NSManagedObject
@@ -231,13 +236,18 @@ SWIFT_CLASS("_TtC15Virtual_Tourist5Photo")
 @property (nonatomic, strong) Pin * __nonnull pin;
 - (nonnull instancetype)initWithEntity:(NSEntityDescription * __nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * __nullable)context OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithPhotoURL:(NSString * __nonnull)photoURL pin:(Pin * __nonnull)pin context:(NSManagedObjectContext * __nonnull)context OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, strong) UIImage * __nullable image;
+- (NSURL * __nonnull)getFileURL;
+- (void)prepareForDeletion;
 @end
 
+@class NSNumber;
 
 SWIFT_CLASS("_TtC15Virtual_Tourist3Pin")
 @interface Pin : NSManagedObject <MKAnnotation>
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
+@property (nonatomic, strong) NSNumber * __nullable numPages;
 @property (nonatomic, copy) NSArray<Photo *> * __nonnull photos;
 @property (nonatomic) BOOL isDownloading;
 - (nonnull instancetype)initWithEntity:(NSEntityDescription * __nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * __nullable)context OBJC_DESIGNATED_INITIALIZER;
