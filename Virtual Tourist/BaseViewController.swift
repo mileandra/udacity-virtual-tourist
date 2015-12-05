@@ -33,7 +33,7 @@ class BaseViewController: UIViewController {
             return
         }
         pin.isDownloading = true
-        FlickrClient.sharedInstance().getPhotosForPin(pin) { (success, errorString) in
+        FlickrClient.sharedInstance.getPhotosForPin(pin) { (success, errorString) in
             pin.isDownloading = false
             
             CoreDataStackManager.sharedInstance().saveContext()

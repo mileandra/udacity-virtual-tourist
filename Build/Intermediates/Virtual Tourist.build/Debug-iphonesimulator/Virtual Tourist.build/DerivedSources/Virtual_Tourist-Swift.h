@@ -148,8 +148,8 @@ SWIFT_CLASS("_TtC15Virtual_Tourist10FlickrCell")
 SWIFT_CLASS("_TtC15Virtual_Tourist12FlickrClient")
 @interface FlickrClient : NSObject
 @property (nonatomic, strong) NSURLSession * __nonnull session;
-- (NSURLSessionDataTask * __nonnull)taskForGETMethod:(NSString * __nullable)url parameters:(NSDictionary<NSString *, id> * __nullable)parameters parseJSON:(BOOL)parseJSON completionHandler:(void (^ __nonnull)(id __null_unspecified, NSError * __nullable))completionHandler;
 + (FlickrClient * __nonnull)sharedInstance;
+- (NSURLSessionDataTask * __nonnull)taskForGETMethod:(NSString * __nullable)url parameters:(NSDictionary<NSString *, id> * __nullable)parameters parseJSON:(BOOL)parseJSON completionHandler:(void (^ __nonnull)(id __null_unspecified, NSError * __nullable))completionHandler;
 + (NSString * __nonnull)escapedParameters:(NSDictionary<NSString *, id> * __nonnull)parameters;
 + (void)parseJSONWithCompletionHandler:(NSData * __nonnull)data completionHandler:(void (^ __nonnull)(id __null_unspecified, NSError * __nullable))completionHandler;
 @end
@@ -203,6 +203,19 @@ SWIFT_CLASS("_TtC15Virtual_Tourist28LocationDetailViewController")
 - (nullable instancetype)initWithCoder:(NSCoder * __nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class NSEntityDescription;
+
+SWIFT_CLASS("_TtC15Virtual_Tourist9MapRegion")
+@interface MapRegion : NSManagedObject
+@property (nonatomic) double centerLatitude;
+@property (nonatomic) double centerLongitude;
+@property (nonatomic) double spanLatitude;
+@property (nonatomic) double spanLongitude;
+- (nonnull instancetype)initWithEntity:(NSEntityDescription * __nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * __nullable)context OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithRegion:(MKCoordinateRegion)region context:(NSManagedObjectContext * __nonnull)context OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic) MKCoordinateRegion region;
+@end
+
 @class UIGestureRecognizer;
 @protocol MKAnnotation;
 @class MKAnnotationView;
@@ -215,6 +228,7 @@ SWIFT_CLASS("_TtC15Virtual_Tourist17MapViewController")
 @property (nonatomic, strong) Pin * __null_unspecified selectedPin;
 @property (nonatomic, strong) Pin * __nullable lastAddedPin;
 @property (nonatomic) BOOL isEditMode;
+@property (nonatomic, strong) MapRegion * __nullable mapViewRegion;
 - (void)viewDidLoad;
 - (void)didReceiveMemoryWarning;
 - (NSArray<Pin *> * __nonnull)fetchAllPins;
@@ -231,7 +245,6 @@ SWIFT_CLASS("_TtC15Virtual_Tourist17MapViewController")
 - (nullable instancetype)initWithCoder:(NSCoder * __nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class NSEntityDescription;
 @class UIImage;
 @class NSURL;
 

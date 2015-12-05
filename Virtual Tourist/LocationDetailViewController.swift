@@ -40,6 +40,7 @@ class LocationDetailViewController: BaseViewController, UICollectionViewDataSour
             try fetchedResultsController.performFetch()
         } catch let error1 as NSError {
             error = error1
+            print(error)
         }
         
         if error != nil  || fetchedResultsController.fetchedObjects?.count == 0 {

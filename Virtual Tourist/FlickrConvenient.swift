@@ -59,25 +59,27 @@ extension FlickrClient {
                 photosArray = photosDictionary["photo"] as? [[String: AnyObject]],
                     numPages = photosDictionary["pages"] as? Int {
                     
-                        pin.numPages = numPages
-                        
-                        for photoDictionary in photosArray {
-                            let photoURLString = photoDictionary["url_m"] as! String
-                            let photo = Photo(photoURL: photoURLString, pin: pin, context: self.sharedContext)
+                        dispatch_async(dispatch_get_main_queue(), {
+                            pin.numPages = numPages
                             
-                            self.downloadImageForPhoto(photo) { (success, errorString) in
-                                if success {
-                                    dispatch_async(dispatch_get_main_queue(), {
-                                        CoreDataStackManager.sharedInstance().saveContext()
-                                        completionHandler(success: true, errorString: nil)
-                                    })
-                                } else {
-                                    dispatch_async(dispatch_get_main_queue(), {
-                                        completionHandler(success: false, errorString: errorString)
-                                    })
+                            for photoDictionary in photosArray {
+                                let photoURLString = photoDictionary["url_m"] as! String
+                                let photo = Photo(photoURL: photoURLString, pin: pin, context: self.sharedContext)
+                                
+                                self.downloadImageForPhoto(photo) { (success, errorString) in
+                                    if success {
+                                        dispatch_async(dispatch_get_main_queue(), {
+                                            CoreDataStackManager.sharedInstance().saveContext()
+                                            completionHandler(success: true, errorString: nil)
+                                        })
+                                    } else {
+                                        dispatch_async(dispatch_get_main_queue(), {
+                                            completionHandler(success: false, errorString: errorString)
+                                        })
+                                    }
                                 }
                             }
-                        }
+                        })
                 } else {
                     completionHandler(success: false, errorString: "Unable to download Photos")
                 }
@@ -93,15 +95,17 @@ extension FlickrClient {
                 completionHandler(success: false, errorString: "Unable to download Photo")
             } else {
                 if let result = result {
-                    let fileName = (photo.photoURL as NSString).lastPathComponent
-                    let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-                    let pathArray = [path, fileName]
-                    let fileURL = NSURL.fileURLWithPathComponents(pathArray)!
-                    
-                    NSFileManager.defaultManager().createFileAtPath(fileURL.path!, contents: result as? NSData, attributes: nil)
-                    
-                    photo.imagePath = fileURL.path
-                    completionHandler(success: true, errorString: nil)
+                    dispatch_async(dispatch_get_main_queue(), {
+                        let fileName = (photo.photoURL as NSString).lastPathComponent
+                        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+                        let pathArray = [path, fileName]
+                        let fileURL = NSURL.fileURLWithPathComponents(pathArray)!
+                        
+                        NSFileManager.defaultManager().createFileAtPath(fileURL.path!, contents: result as? NSData, attributes: nil)
+                        
+                        photo.imagePath = fileURL.path
+                        completionHandler(success: true, errorString: nil)
+                    })
                 } else {
                     completionHandler(success: false, errorString: "Unable to download Photo")
                 }

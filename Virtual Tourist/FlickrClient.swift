@@ -13,7 +13,7 @@ class FlickrClient: NSObject {
     var session: NSURLSession    
     
     
- // TODO: implement image search
+    static let sharedInstance = FlickrClient()
     
     private override init() {
         session = NSURLSession.sharedSession()
@@ -82,16 +82,7 @@ class FlickrClient: NSObject {
         return task
     }
     
-    // MARK: Shared Instance
-    
-    class func sharedInstance() -> FlickrClient {
-        
-        struct Singleton {
-            static var sharedInstance = FlickrClient()
-        }
-        
-        return Singleton.sharedInstance
-    }
+
     
     // MARK: Helper Methods
     class func escapedParameters(parameters: [String : AnyObject]) -> String {

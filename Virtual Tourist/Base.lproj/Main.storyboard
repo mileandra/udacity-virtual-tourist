@@ -174,12 +174,12 @@
                                                 <exclude reference="sFS-ou-O2d"/>
                                             </mask>
                                             <mask key="constraints">
+                                                <exclude reference="NZj-Gq-zip"/>
+                                                <exclude reference="zcu-sb-RLm"/>
                                                 <exclude reference="9yW-bP-WqQ"/>
                                                 <exclude reference="KjN-6I-DmA"/>
                                                 <exclude reference="nDh-hF-MBi"/>
                                                 <exclude reference="noS-2W-7Te"/>
-                                                <exclude reference="NZj-Gq-zip"/>
-                                                <exclude reference="zcu-sb-RLm"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
@@ -188,12 +188,12 @@
                                                 <include reference="sFS-ou-O2d"/>
                                             </mask>
                                             <mask key="constraints">
+                                                <include reference="NZj-Gq-zip"/>
+                                                <include reference="zcu-sb-RLm"/>
                                                 <exclude reference="9yW-bP-WqQ"/>
                                                 <exclude reference="KjN-6I-DmA"/>
                                                 <exclude reference="nDh-hF-MBi"/>
                                                 <exclude reference="noS-2W-7Te"/>
-                                                <include reference="NZj-Gq-zip"/>
-                                                <include reference="zcu-sb-RLm"/>
                                             </mask>
                                         </variation>
                                         <connections>
