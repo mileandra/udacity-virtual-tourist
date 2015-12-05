@@ -21,6 +21,7 @@ class MapViewController: BaseViewController, MKMapViewDelegate {
     var selectedPin:Pin!
     var lastAddedPin:Pin? = nil
     var isEditMode = false
+    var mapViewRegion:MapRegion?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,26 +161,29 @@ class MapViewController: BaseViewController, MKMapViewDelegate {
     
     
     func saveMapRegion() {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.setDouble(mapView.region.center.latitude, forKey: mapKeys.centerLatitude)
-        userDefaults.setDouble(mapView.region.center.longitude, forKey: mapKeys.centerLongitude)
-        userDefaults.setDouble(mapView.region.span.latitudeDelta, forKey: mapKeys.spanLatitude)
-        userDefaults.setDouble(mapView.region.span.longitudeDelta, forKey: mapKeys.spanLongitude)
+        if mapViewRegion == nil {
+            mapViewRegion = MapRegion(region: mapView.region, context: sharedContext)
+        } else {
+            mapViewRegion!.region = mapView.region
+        }
+        CoreDataStackManager.sharedInstance().saveContext()
     }
     
     func loadMapRegion() {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        let centerLatitude = userDefaults.doubleForKey(mapKeys.centerLatitude)
-        
-        if centerLatitude != 0 {
-            let centerLongitude = userDefaults.doubleForKey(mapKeys.centerLongitude)
-            let spanLatitude = userDefaults.doubleForKey(mapKeys.spanLatitude)
-            let spanLongitude = userDefaults.doubleForKey(mapKeys.spanLongitude)
-            
-            let center = CLLocationCoordinate2DMake(centerLatitude, centerLongitude)
-            let span = MKCoordinateSpanMake(spanLatitude, spanLongitude)
-            let region = MKCoordinateRegionMake(center, span)
-            mapView.region = region
+        let fetchRequest = NSFetchRequest(entityName: "MapRegion")
+        var regions:[MapRegion] = []
+        do {
+            let results = try sharedContext.executeFetchRequest(fetchRequest)
+            regions = results as! [MapRegion]
+        } catch let error as NSError {
+            // only map region failed, so failing silent
+            print("An error occured accessing managed object context \(error.localizedDescription)")
+        }
+        if regions.count > 0 {
+            mapViewRegion = regions[0]
+            mapView.region = mapViewRegion!.region
+        } else {
+            mapViewRegion = MapRegion(region: mapView.region, context: sharedContext)
         }
     }
     
@@ -191,6 +195,7 @@ class MapViewController: BaseViewController, MKMapViewDelegate {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "locationDetail" {
+            mapView.deselectAnnotation(selectedPin, animated: false)
             let controller = segue.destinationViewController as! LocationDetailViewController
             controller.pin = selectedPin
         }

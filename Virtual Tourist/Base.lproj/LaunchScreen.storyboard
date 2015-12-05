@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8150" systemVersion="15A204g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8122"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -15,13 +18,95 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="4bt-fb-ZYe">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="xA4-SL-h8Q">
+                                <rect key="frame" x="200" y="93" width="200" height="200"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="100" y="95" width="200" height="200"/>
+                                </variation>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Virtual Tourist" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6q-sL-cCg">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(c) 2015 Julia Will " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XNG-Iz-XRf">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xA4-SL-h8Q" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="4SQ-io-T5z"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4bt-fb-ZYe" secondAttribute="trailing" constant="-20" id="7kV-M9-WNY"/>
+                            <constraint firstItem="h6q-sL-cCg" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Idz-7r-TNu"/>
+                            <constraint firstItem="4bt-fb-ZYe" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" id="Jqs-EF-rJw"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="XNG-Iz-XRf" secondAttribute="bottom" constant="20" id="NDW-wH-3Bb"/>
+                            <constraint firstItem="xA4-SL-h8Q" firstAttribute="top" secondItem="4bt-fb-ZYe" secondAttribute="top" id="QqY-ed-W9G"/>
+                            <constraint firstItem="XNG-Iz-XRf" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="8" id="Sp3-iD-4zM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XNG-Iz-XRf" secondAttribute="trailing" constant="9" id="Yfp-Hd-Gsj"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="4bt-fb-ZYe" secondAttribute="bottom" id="dbp-yN-Ozv"/>
+                            <constraint firstItem="xA4-SL-h8Q" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="75" id="dqr-il-8Od"/>
+                            <constraint firstItem="4bt-fb-ZYe" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-20" id="ktF-yu-zNI"/>
+                            <constraint firstItem="xA4-SL-h8Q" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="qD1-WO-gGF"/>
+                            <constraint firstItem="h6q-sL-cCg" firstAttribute="top" secondItem="xA4-SL-h8Q" secondAttribute="bottom" constant="74" id="vug-B2-swx"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="h6q-sL-cCg"/>
+                                <exclude reference="XNG-Iz-XRf"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Sp3-iD-4zM"/>
+                                <exclude reference="Yfp-Hd-Gsj"/>
+                                <exclude reference="Idz-7r-TNu"/>
+                                <exclude reference="vug-B2-swx"/>
+                                <exclude reference="7kV-M9-WNY"/>
+                                <exclude reference="Jqs-EF-rJw"/>
+                                <exclude reference="ktF-yu-zNI"/>
+                                <exclude reference="dqr-il-8Od"/>
+                                <exclude reference="qD1-WO-gGF"/>
+                                <exclude reference="NDW-wH-3Bb"/>
+                                <exclude reference="dbp-yN-Ozv"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="h6q-sL-cCg"/>
+                                <include reference="XNG-Iz-XRf"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Sp3-iD-4zM"/>
+                                <include reference="Yfp-Hd-Gsj"/>
+                                <include reference="Idz-7r-TNu"/>
+                                <include reference="vug-B2-swx"/>
+                                <include reference="7kV-M9-WNY"/>
+                                <include reference="Jqs-EF-rJw"/>
+                                <include reference="ktF-yu-zNI"/>
+                                <exclude reference="4SQ-io-T5z"/>
+                                <exclude reference="QqY-ed-W9G"/>
+                                <include reference="dqr-il-8Od"/>
+                                <include reference="qD1-WO-gGF"/>
+                                <include reference="NDW-wH-3Bb"/>
+                                <include reference="dbp-yN-Ozv"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.5" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="background" width="375" height="667"/>
+        <image name="logo" width="127" height="127"/>
+    </resources>
 </document>
